@@ -28,6 +28,11 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signUpUser({ email, password }))
+
+    if (isAuthenticated) {
+      setEmail("");
+      setPassword("");
+    }
   }
 
   return (

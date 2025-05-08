@@ -8,10 +8,10 @@ const initialState = {
     error: null,
 }
 
-export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rejectWithValue }) => {
-    const url = "https://localhost:7277/api/Auth/signup";
+export const signInUser = createAsyncThunk("auth/signin", async (userData, { rejectWithValue }) => {
+    const url = "https://localhost:7277/api/Auth/signin";
     try {
-        console.log(`User Data: ${userData}`);
+        console.log("User Data: ", userData);
 
         const response = await fetch(url, {
             method: "POST",
@@ -20,7 +20,9 @@ export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rej
         });
         if (!response.ok) {
             const error = await response.json()
-            return rejectWithValue(error.detail || "Signup failed.");
+            console.log("SIGN IN ERROR : ", error.detail);
+
+            return rejectWithValue(error.detail || "Sign in failed.");
         }
 
         const json = await response.json();
@@ -31,26 +33,26 @@ export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rej
     }
 })
 
-const signUpSlice = createSlice({
-    name: "signup",
+const signInSlice = createSlice({
+    name: "signin",
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(signUpUser.pending, (state) => {
+            .addCase(signInUser.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(signUpUser.fulfilled, (state, action) => {
+            .addCase(signInUser.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload;
                 state.isAuthenticated = true;
                 state.error = null;
             })
-            .addCase(signUpUser.rejected, (state, action) => {
+            .addCase(signInUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });
     },
 });
 
-export default signUpSlice.reducer;
+export default signInSlice.reducer;
