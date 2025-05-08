@@ -1,15 +1,26 @@
 import React from 'react'
-import { useAuth } from '../../../contexts/AuthContext'
+import "./SignUp.css"
 
 const SignUp = () => {
-  try {
-    const { signUp } = useAuth()
-  }
-  catch { }
-  
 
   return (
-    <div>SignUp</div>
+    <div className='modal-wrapper'>
+      <div className="card">
+        <form >
+          <h1>Sign up</h1>
+          <div className="form-group">
+            <input type="email" id='email' placeholder='Email' />
+          </div>
+          <div className="form-group">
+            <input type="password" id='password' placeholder='Password' />
+          </div>
+          <div className="form-group">
+            <input type="password" id='confirmpassword' placeholder='Confirm password' />
+          </div>
+          <button type='submit'>Sign up</button>
+        </form>
+      </div>
+    </div>
   )
 }
 
