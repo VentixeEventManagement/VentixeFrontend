@@ -1,15 +1,16 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+// import { useAuth } from '../contexts/AuthContext'
+import { useSelector } from 'react-redux';
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({ children }) => {
     try {
-        const { isAuthenticated } = useAuth()
-     
+        const { isAuthenticated } = useSelector((state) => state.signup)
+
         if (isAuthenticated && isAuthenticated !== undefined) {
             return children
         }
-    
+
     }
     catch { }
 

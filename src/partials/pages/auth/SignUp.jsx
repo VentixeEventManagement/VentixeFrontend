@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./SignUp.css"
 import { signUpUser } from '../../../features/SignUpSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { loading, error, isAuthenticated } = useSelector((state) => state.signup)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard")
+    }
+  })
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
