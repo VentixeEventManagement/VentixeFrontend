@@ -13,9 +13,11 @@ const SignUp = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      setEmail("");
+      setPassword("");
       navigate("/dashboard")
     }
-  })
+  }, [isAuthenticated, navigate])
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -28,11 +30,6 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signUpUser({ email, password }))
-
-    if (isAuthenticated) {
-      setEmail("");
-      setPassword("");
-    }
   }
 
   return (
@@ -52,7 +49,6 @@ const SignUp = () => {
           <button type='submit' disabled={loading}>Sign up</button>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
-          {isAuthenticated && <p>You're signed up!</p>}
         </form>
       </div>
     </div>
