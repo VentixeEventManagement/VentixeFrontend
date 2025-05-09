@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import "./SignUp.css"
-import { signUpUser } from '../../../features/SignUpSlice'
+import { signUpUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading, error, isAuthenticated } = useSelector((state) => state.signup)
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (isAuthenticated) {
+      setEmail("");
+      setPassword("");
       navigate("/dashboard")
     }
-  })
+  }, [isAuthenticated, navigate])
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -47,7 +49,6 @@ const SignUp = () => {
           <button type='submit' disabled={loading}>Sign up</button>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
-          {isAuthenticated && <p>You're signed up!</p>}
         </form>
       </div>
     </div>
