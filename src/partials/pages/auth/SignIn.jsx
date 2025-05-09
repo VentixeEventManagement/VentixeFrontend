@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { signInUser } from '../../../features/SignInSlice'
+import { signInUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import "./SignIn.css/"
+import "./SignIn.css"
 
 const SignIn = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading, error, isAuthenticated } = useSelector((state) => state.signin)
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      setEmail("");
-      setPassword("");
-      navigate("/dashboard")
-    }
-  }, [isAuthenticated, navigate])
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     setEmail("");
+  //     setPassword("");
+  //   }
+  // }, [isAuthenticated])
+
+  // useEffect(() => {
+  //   if (!loading && isAuthenticated === true) {
+  //     navigate("/dashboard", { replace: true })
+  //   }
+  // }, [isAuthenticated, navigate])
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -30,6 +35,10 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signInUser({ email, password }))
+
+    if (isAuthenticated) {
+      navigate("/dashboard")
+    }
   }
 
   return (

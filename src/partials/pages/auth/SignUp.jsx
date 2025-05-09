@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import "./SignUp.css"
-import { signUpUser } from '../../../features/SignUpSlice'
+import { signUpUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading, error, isAuthenticated } = useSelector((state) => state.signup)
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +15,7 @@ const SignUp = () => {
     if (isAuthenticated) {
       setEmail("");
       setPassword("");
-      navigate("/dashboard")
+
     }
   }, [isAuthenticated, navigate])
 
@@ -30,6 +30,9 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signUpUser({ email, password }))
+    if (isAuthenticated) {
+      navigate("/dashboard")
+    }
   }
 
   return (
