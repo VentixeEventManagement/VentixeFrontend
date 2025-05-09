@@ -9,7 +9,7 @@ const initialState = {
 }
 
 export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rejectWithValue }) => {
-    const url = "https://localhost:7277/api/Auth/signup";
+    const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/signup";
     try {
         console.log(`User Data: ${userData}`);
 
@@ -32,7 +32,7 @@ export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rej
 })
 
 export const signInUser = createAsyncThunk("auth/signin", async (userData, { rejectWithValue }) => {
-    const url = "https://localhost:7277/api/Auth/signin";
+    const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/signin";
     try {
         console.log("User Data: ", userData);
 
