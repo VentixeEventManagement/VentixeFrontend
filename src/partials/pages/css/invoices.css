@@ -1,0 +1,42 @@
+.invoice-header {
+  color: hotpink;
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.invoice-card {
+  background-color: #f26cf9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 16px 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 500px;
+  border-left: 6px solid #5d5d64;
+
+  display: grid;
+  
+    grid-template-rows: auto auto auto auto auto 1fr;
+
+  gap: 0.5rem;
+}
+.invoice-list-total-amount {
+  font-size: 24px;
+}
+
+.invoice-list-due-date {
+  color: brown;
+}
+
+.invoice-list-status {
+  background-color: #f26cf9;
+  color: rgb(43, 40, 40);
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid #943599;
+  border-radius: 5px;
+  width: 20rem;
+  transition: all 0.3s ease-in-out;
+}
