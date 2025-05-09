@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { signInUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 import "./SignIn.css"
 
 const SignIn = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading, error, isAuthenticated } = useSelector((state) => state.auth)
+  const { user, loading, error, isAuthenticated } = useSelector((state) => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-userId']);
 
   useEffect(() => {
     if (isAuthenticated) {
       setEmail("");
       setPassword("");
       navigate("/dashboard")
+      setCookie("userId", user.userId, { path: "/" })
+      console.log("User details", user);
     }
   }, [isAuthenticated, navigate])
 
