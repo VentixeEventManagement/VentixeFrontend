@@ -15,7 +15,7 @@ const SignUp = () => {
     if (isAuthenticated) {
       setEmail("");
       setPassword("");
-
+      navigate("/dashboard")
     }
   }, [isAuthenticated, navigate])
 
@@ -30,9 +30,6 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signUpUser({ email, password }))
-    if (isAuthenticated) {
-      navigate("/dashboard")
-    }
   }
 
   return (

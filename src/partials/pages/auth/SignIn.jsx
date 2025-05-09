@@ -11,18 +11,13 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     setEmail("");
-  //     setPassword("");
-  //   }
-  // }, [isAuthenticated])
-
-  // useEffect(() => {
-  //   if (!loading && isAuthenticated === true) {
-  //     navigate("/dashboard", { replace: true })
-  //   }
-  // }, [isAuthenticated, navigate])
+  useEffect(() => {
+    if (isAuthenticated) {
+      setEmail("");
+      setPassword("");
+      navigate("/dashboard")
+    }
+  }, [isAuthenticated, navigate])
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -35,10 +30,6 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signInUser({ email, password }))
-
-    if (isAuthenticated) {
-      navigate("/dashboard")
-    }
   }
 
   return (
