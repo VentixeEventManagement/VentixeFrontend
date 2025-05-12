@@ -19,7 +19,6 @@ const SignIn = () => {
       setPassword("");
       navigate("/dashboard")
       setCookie("userId", user.userId, { path: "/" })
-      console.log("User details", user);
     }
   }, [isAuthenticated, navigate])
 

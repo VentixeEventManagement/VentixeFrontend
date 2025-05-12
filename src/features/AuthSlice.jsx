@@ -48,8 +48,6 @@ export const signInUser = createAsyncThunk("auth/signin", async (userData, { rej
         }
 
         const json = await response.json();
-        // console.log("User details: ", json);
-
         return json;
 
     } catch (err) {
