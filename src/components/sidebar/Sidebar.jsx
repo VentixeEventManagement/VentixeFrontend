@@ -5,6 +5,7 @@ import SignOutBtn from '../signOutBtn/SignOutBtn'
 
 const Sidebar = () => {
   return (
+    <> 
     <div className="sidebar-container-all-links">
       <div className="sidebar-container-link">
         <NavLink
@@ -70,6 +71,7 @@ const Sidebar = () => {
 
 
     <SignOutBtn />
+      </>
   );
 };
 
