@@ -1,13 +1,14 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-// import { useAuth } from '../contexts/AuthContext'
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 const ProtectedRoute = ({ children }) => {
     try {
-        const { isAuthenticated } = useSelector((state) => state.auth)
+        const [cookies] = useCookies(['cookie-userId']);
+        const { isAuthenticated } = useSelector((state) => state.auth);
 
-        if (isAuthenticated && isAuthenticated !== undefined) {
+        if (isAuthenticated && isAuthenticated !== undefined || cookies.userId) {
             return children
         }
 

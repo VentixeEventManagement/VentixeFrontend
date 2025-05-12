@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SignOutBtn from '../signOutBtn/SignOutBtn'
+
 
 const Sidebar = () => {
   return (
@@ -14,6 +16,8 @@ const Sidebar = () => {
           Dashboard
         </NavLink>
       </div>
+
+
 
       <div className="sidebar-container-link">
         <NavLink className="sidebar-link" to="">
@@ -63,6 +67,9 @@ const Sidebar = () => {
         </NavLink>
       </div>
     </div>
+
+
+    <SignOutBtn />
   );
 };
 
