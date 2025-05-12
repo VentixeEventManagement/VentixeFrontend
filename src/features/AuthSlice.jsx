@@ -32,9 +32,9 @@ export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rej
 })
 
 export const signInUser = createAsyncThunk("auth/signin", async (userData, { rejectWithValue }) => {
+
     const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/signin";
     try {
-        console.log("User Data: ", userData);
 
         const response = await fetch(url, {
             method: "POST",
@@ -43,7 +43,6 @@ export const signInUser = createAsyncThunk("auth/signin", async (userData, { rej
         });
         if (!response.ok) {
             const error = await response.json()
-            console.log("SIGN IN ERROR : ", error.detail);
 
             return rejectWithValue(error.detail || "Sign in failed.");
         }
