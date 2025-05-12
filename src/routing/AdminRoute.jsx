@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
         const { isAuthenticated } = useSelector((state) => state.auth);
         const isAdmin = true;
 
-        if (isAuthenticated && isAuthenticated !== undefined || cookies.userId !== null) {
+        if (isAuthenticated && isAuthenticated !== undefined || cookies.userId) {
             if (isAdmin) {
                 return children
             }
