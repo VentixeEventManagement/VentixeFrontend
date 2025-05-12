@@ -3,6 +3,7 @@ import { signInUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+import Spinner from '../../../components/spinner/Spinner'
 import "./SignIn.css"
 
 const SignIn = () => {
@@ -37,6 +38,7 @@ const SignIn = () => {
 
   return (
     <div className='modal-wrapper'>
+      {loading && <Spinner />}
       <div className="card">
         <form onSubmit={handleSubmit}>
           <h1>Sign In</h1>
@@ -47,6 +49,8 @@ const SignIn = () => {
             <input type="password" id='password' placeholder='Password' onChange={handlePasswordChange} required />
           </div>
           <button type='submit' disabled={loading}>Sign in</button>
+
+          <span>Don't have an account? <a href="/signup">Sign up</a></span>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
         </form>

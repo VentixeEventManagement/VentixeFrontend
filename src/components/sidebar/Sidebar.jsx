@@ -5,9 +5,11 @@ import "./Sidebar.css";
 
 const Sidebar = () => {
   return (
+
     <>
       <div className="logo-sidebar">
         <img src="/logos/VentixeLogoTopOfSidebar.svg" alt="Dashboard icon" />
+
       </div>
       <div className="sidebar-container-all-links">
         <div className="sidebar-container-link">
@@ -207,8 +209,8 @@ const Sidebar = () => {
         />
       </NavLink>
 
-      <SignOutBtn />
-    </>
+    <SignOutBtn />
+      </>
   );
 };
 
