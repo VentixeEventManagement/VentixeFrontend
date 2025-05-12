@@ -86,18 +86,6 @@ a {
   background-color: var(--gray-20);
 }
 
-.sidebar {
-  width: 223px;
-  border-radius: 1rem;
-  grid-area: sidebar;
-  background-color: var(--cool-gray-10);
-}
-
-.sidebar-container-all-links {
-  margin-top: 10rem;
-  padding: 12px;
-}
-
 .sidebar-container-link {
   margin-bottom: 12px;
 }
