@@ -50,7 +50,7 @@ const SignIn = () => {
           </div>
           <button type='submit' disabled={loading}>Sign in</button>
 
-          <span>Don't have an account? <a href="/signup">Sign up</a></span>
+          <span className="signup-redirect">Don't have an account? <a href="/signup">Sign up</a></span>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
         </form>

@@ -11,6 +11,7 @@ const SignUp = () => {
   const { loading, error, isAuthenticated } = useSelector((state) => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -33,6 +34,10 @@ const SignUp = () => {
     dispatch(signUpUser({ email, password }))
   }
 
+  const confirmPassword = (e) => {
+
+  }
+
   return (
     <div className='modal-wrapper'>
       {loading && <Spinner />}
@@ -46,10 +51,10 @@ const SignUp = () => {
             <input type="password" id='password' placeholder='Password' onChange={handlePasswordChange} required />
           </div>
           <div className="form-group">
-            <input type="password" id='confirmpassword' placeholder='Confirm password' />
+            <input type="password" id='confirmpassword' placeholder='Confirm password' onChange={setConfirmPassword}/>
           </div>
           <button type='submit' disabled={loading}>Sign up</button>
-          <span>Already have an account? <a href="/login">Sign In</a></span>
+          <span className="signin-redirect">Already have an account? <a href="/login">Sign In</a></span>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
         </form>
