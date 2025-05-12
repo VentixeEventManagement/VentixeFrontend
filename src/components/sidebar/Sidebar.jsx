@@ -61,7 +61,7 @@ const Sidebar = () => {
 
         <div className="sidebar-container-link">
           <NavLink className="sidebar-link" to="">
-            Feedback
+            Feedback 
           </NavLink>
         </div>
       </div>
