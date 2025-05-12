@@ -20,7 +20,14 @@ export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rej
         });
         if (!response.ok) {
             const error = await response.json()
-            return rejectWithValue(error.detail || "Signup failed.");
+            const details = error.detail;
+
+            if (Array.isArray(details)) {
+                details = [...new Set(details)];
+                return rejectWithValue(details);
+            } else {
+                return rejectWithValue([details || "Signup failed."]);
+            }
         }
 
         const json = await response.json();

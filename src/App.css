@@ -148,3 +148,10 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+.error-message {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  color: red;
+}
