@@ -62,6 +62,10 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .auth-layout {
 }
 
@@ -131,4 +135,16 @@ body {
   border-radius: 0 4px 4px 0;
   background-color: var(--primary-90);
   transition: all 0.3s ease;
+}
+
+.spinner-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
