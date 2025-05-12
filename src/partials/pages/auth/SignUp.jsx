@@ -3,6 +3,7 @@ import "./SignUp.css"
 import { signUpUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../../../components/spinner/Spinner'
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -34,9 +35,10 @@ const SignUp = () => {
 
   return (
     <div className='modal-wrapper'>
+      {loading && <Spinner />}
       <div className="card">
         <form onSubmit={handleSubmit}>
-          <h1>Sign up</h1>
+          <h1>Register</h1>
           <div className="form-group">
             <input type="email" id='email' placeholder='Email' onChange={handleEmailChange} required />
           </div>
@@ -47,6 +49,7 @@ const SignUp = () => {
             <input type="password" id='confirmpassword' placeholder='Confirm password' />
           </div>
           <button type='submit' disabled={loading}>Sign up</button>
+          <span>Already have an account? <a href="/login">Sign In</a></span>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
         </form>
