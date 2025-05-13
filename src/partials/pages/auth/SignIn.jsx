@@ -25,6 +25,7 @@ const SignIn = () => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
+    console.log("USER ID: ", cookies);
   }
 
   const handlePasswordChange = (e) => {
@@ -50,9 +51,9 @@ const SignIn = () => {
           </div>
           <button type='submit' disabled={loading}>Sign in</button>
 
-          <span>Don't have an account? <a href="/signup">Sign up</a></span>
+          <span className="signup-redirect">Don't have an account? <a href="/signup">Sign up</a></span>
 
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && <span className="error-message">{error}</span>}
         </form>
       </div>
     </div>
