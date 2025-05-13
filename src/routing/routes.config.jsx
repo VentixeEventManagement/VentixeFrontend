@@ -27,7 +27,7 @@ export const routes = [
   },
   {
     layout: PortalLayout,
-    protected: false,
+    protected: true,
     children: [
       { path: "/dashboard", element: <UserDashboard /> },
       { path: "/bookings", element: <UserBookings /> },
@@ -35,8 +35,8 @@ export const routes = [
   },
   {
     layout: PortalLayout,
-    protected: false,
-    adminOnly: false,
+    protected: true,
+    adminOnly: true,
     children: [
       { path: "/admin/dashboard", element: <AdminDashboard /> },
       { path: "/admin/bookings", element: <AdminBookings /> },

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { signOut } from '../../features/AuthSlice';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import SvgIcon from "../svgIcon/SvgIcon"
 import "./SignOutBtn.css"
 
 const SignOutBtn = () => {
