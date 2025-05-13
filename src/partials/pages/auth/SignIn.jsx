@@ -25,6 +25,7 @@ const SignIn = () => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
+    console.log("USER ID: ", cookies);
   }
 
   const handlePasswordChange = (e) => {
