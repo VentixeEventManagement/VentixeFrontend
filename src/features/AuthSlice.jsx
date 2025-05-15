@@ -73,6 +73,13 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+        simulateLogin: (state) => {
+            state.user = { id: 1, name: "Test User" }; // Simulated user data
+            state.token = "fake-token"; // Simulated token
+            state.isAuthenticated = true;
+            state.error = null;
+        },
+
     },
     extraReducers: (builder) => {
         builder
