@@ -200,17 +200,19 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <NavLink>
-        <img
-          className="promotional-banner"
-          to=""
-          src="/icons/PromotionalBannerOnSidebar.svg"
-          alt="Promotionalbanner - try new version"
-        />
-      </NavLink>
+      <footer className="sidebar-footer">
+        <NavLink>
+          <img
+            className="promotional-banner"
+            to=""
+            src="/icons/PromotionalBannerOnSidebar.svg"
+            alt="Promotionalbanner - try new version"
+          />
+        </NavLink>
 
-    <SignOutBtn />
-      </>
+        <SignOutBtn />
+      </footer>
+    </>
   );
 };
 

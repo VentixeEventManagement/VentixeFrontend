@@ -7,17 +7,71 @@ const initialState = {
     loading: false,
     error: null,
 }
+export const sendEmailRequest = createAsyncThunk("auth/sendemail", async (email, { rejectWithValue }) => {
+    const url = `https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/sendrequest?email=${email}`;
+    try {
 
-export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rejectWithValue }) => {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            const details = error.details;
+
+            if (Array.isArray(details)) {
+                details = [...new Set(details)];
+                return rejectWithValue(details);
+            } else {
+                return rejectWithValue([details])
+            }
+        }
+
+        return "Verification email sent successfully.";
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when sending email.");
+    }
+})
+
+export const verifyCode = createAsyncThunk("auth/verifyemail", async ({ email, verificationCode }, { rejectWithValue }) => {
+    const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/verify";
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, verificationCode })
+        });
+
+        if (!response.ok) {
+            const error = await response.json()
+            const details = error.detail;
+
+            if (Array.isArray(details)) {
+                details = [...new Set(details)];
+                return rejectWithValue(details);
+            } else {
+                return rejectWithValue([details || "Faild to verify."]);
+            }
+        }
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when trying to verify.")
+    }
+});
+
+export const signUpUser = createAsyncThunk("auth/signup", async ({ email, password }, { rejectWithValue }) => {
     const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/signup";
     try {
-        console.log(`User Data: ${userData}`);
+        console.log(`User Data: ${email} ${password}`);
 
         const response = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({ email, password })
         });
+
         if (!response.ok) {
             const error = await response.json()
             const details = error.detail;
@@ -76,6 +130,28 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // Send verification email
+            .addCase(sendEmailRequest.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(sendEmailRequest.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(sendEmailRequest.rejected, (state) => {
+                state.loading = false
+            })
+
+            // Verify code
+            .addCase(verifyCode.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(verifyCode.fulfilled, (state) => {
+                state.loading = false
+            })
+            .addCase(verifyCode.rejected, (state) => {
+                state.loading = false
+            })
+
             // Sign Up User
             .addCase(signUpUser.pending, (state) => {
                 state.loading = true;
