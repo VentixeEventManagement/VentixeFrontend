@@ -21,6 +21,16 @@ export const fetchInvoiceById = createAsyncThunk(
   }
 );
 
+//Editera en faktura:
+export const updateInvoice = createAsyncThunk(
+  "invoices/update",
+  async ({ id, updatedInvoice }, { dispatch }) => {
+    const response = await axios.put(`${APIBaseUrl}/${id}`, updatedInvoice);
+    dispatch(fetchInvoices());
+    return response.data;
+  }
+);
+
 //Delete
 export const deleteInvoice = createAsyncThunk(
   "invoices/delete",
@@ -55,6 +65,17 @@ const invoiceSlice = createSlice({
       })
       .addCase(fetchInvoiceById.fulfilled, (state, action) => {
         state.selected = action.payload;
+      })
+      .addCase(updateInvoice.fulfilled, (state, action) => {
+        state.selected = action.payload;
+      })
+      .addCase(updateInvoice.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deleteInvoice.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
