@@ -6,7 +6,7 @@ import "./Sidebar.css";
 const Sidebar = () => {
   return (
 
-    <>
+    <div className="sidebar-container">
       <div className="logo-sidebar">
         <img src="/logos/VentixeLogoTopOfSidebar.svg" alt="Dashboard icon" />
 
@@ -212,7 +212,7 @@ const Sidebar = () => {
 
         <SignOutBtn />
       </footer>
-    </>
+    </div>
   );
 };
 

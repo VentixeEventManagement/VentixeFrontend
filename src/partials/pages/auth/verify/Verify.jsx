@@ -20,11 +20,11 @@ const Verify = () => {
     })
 
     useEffect(() => {
-        if (succeeded) {
+        if (!succeeded) {
             navigate("/signup/", { state: { email } })
             dispatch(resetStatus());
         }
-    }, [succeeded, navigate])
+    }, [succeeded, navigate, disableBtn])
 
     const handleNumber = (input, index) => {
         const trimedInput = input.trim();

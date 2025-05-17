@@ -16,12 +16,12 @@ const SendEmail = () => {
             navigate("/verify/", { state: { email } })
             dispatch(resetStatus());
         }
-    }, [succeeded, navigate])
+    }, [succeeded, navigate, dispatch, email])
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email)) {
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             dispatch(sendEmailRequest(email));
         }
     }

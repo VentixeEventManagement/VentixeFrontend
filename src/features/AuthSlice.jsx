@@ -145,8 +145,10 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.succeeded = action.payload;
             })
-            .addCase(sendEmailRequest.rejected, (state) => {
-                state.loading = false
+            .addCase(sendEmailRequest.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.succeeded = false;
             })
 
             // Verify code
