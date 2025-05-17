@@ -3,6 +3,7 @@ import axios from "axios";
 
 const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth"
 
+
 const initialState = {
     user: null,
     token: null,
@@ -115,6 +116,7 @@ export const signInUser = createAsyncThunk("auth/signin", async (userData, { rej
     }
 })
 
+
 const authSlice = createSlice({
     name: "auth",
     initialState: initialState,
@@ -126,12 +128,21 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+
         resetStatus: (state) => {
             state.loading = false;
             state.error = null;
             state.succeeded = false;
             state.message = "";
-        }
+        },
+
+        simulateLogin: (state) => {
+            state.user = { id: 1, name: "Developer" };
+            state.token = "fake-token";
+            state.isAuthenticated = true;
+            state.error = null;
+        },
+
     },
     extraReducers: (builder) => {
         builder
@@ -205,6 +216,5 @@ const authSlice = createSlice({
     },
 });
 
-
-export const { signOut, resetStatus } = authSlice.actions;
+export const { signOut, resetStatus, simulateLogin } = authSlice.actions;
 export default authSlice.reducer;
