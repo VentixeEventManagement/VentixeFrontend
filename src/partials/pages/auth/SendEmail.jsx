@@ -2,32 +2,28 @@ import React, { useEffect, useState } from 'react'
 import Spinner from '../../../components/spinner/Spinner'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { sendEmailRequest } from '../../../features/AuthSlice'
+import { sendEmailRequest, resetStatus } from '../../../features/AuthSlice'
 import "./SendEmail.css";
 
 const SendEmail = () => {
     const navigate = useNavigate();
-    const { loading, error } = useSelector((state) => state.auth);
-    const [message, setMessage] = useState("");
+    const { loading, error, succeeded } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
-    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
-        if (submitted && !loading && !error) {
+        if (succeeded) {
             navigate("/verify/", { state: { email } })
+            dispatch(resetStatus());
         }
-    }, [submitted, loading, error, navigate])
+    }, [succeeded, navigate])
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email)) {
             dispatch(sendEmailRequest(email));
-            setSubmitted(true);
         }
-
-        setMessage("Invalid email.")
     }
 
     return (
@@ -45,7 +41,7 @@ const SendEmail = () => {
 
                     <button className="modal-button" type='submit' disabled={loading}>Send verification email</button>
 
-                    {error && <span className="error-message">{error}</span> || message && <span className="error-message">{message}</span>}
+                    {!succeeded && <span className="error-message">{error}</span>}
                 </form>
             </div>
         </div>

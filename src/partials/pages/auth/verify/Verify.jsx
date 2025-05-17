@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { verifyCode } from "../../../../features/AuthSlice";
+import { verifyCode, resetStatus } from "../../../../features/AuthSlice";
 import Spinner from "../../../../components/spinner/Spinner";
 import "./Verify.css";
 
 const Verify = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { loading, error } = useSelector((state) => state.auth);
+    const { loading, error, succeeded } = useSelector((state) => state.auth);
     const inputRefs = useRef([]);
     const buttonRef = useRef()
     const [disableBtn, setDisableBtn] = useState(true);
-    const [submitted, setSubmitted] = useState(false);
     const location = useLocation();
     const email = location.state?.email;
 
@@ -21,10 +20,11 @@ const Verify = () => {
     })
 
     useEffect(() => {
-        if (submitted && !loading && !error) {
+        if (succeeded) {
             navigate("/signup/", { state: { email } })
+            dispatch(resetStatus());
         }
-    }, [submitted, loading, error, navigate])
+    }, [succeeded, navigate])
 
     const handleNumber = (input, index) => {
         const trimedInput = input.trim();
@@ -96,7 +96,6 @@ const Verify = () => {
         const code = inputRefs.current.map(input => input.value).join("");
 
         dispatch(verifyCode({ email, code }))
-        setSubmitted(true);
     }
 
     return (
@@ -114,7 +113,7 @@ const Verify = () => {
                     </div>
                     <button type="submit" ref={buttonRef} className="modal-button" disabled={disableBtn}>Verify</button>
 
-                    {extractErrorMessage() && <div className="error-message"><p>{extractErrorMessage()}</p></div>}
+                    {!succeeded && <div className="error-message"><p>{error}</p></div>}
                 </form>
             </div>
         </div>
