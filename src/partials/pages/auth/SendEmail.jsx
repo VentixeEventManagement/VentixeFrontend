@@ -8,6 +8,7 @@ import "./SendEmail.css";
 const SendEmail = () => {
     const navigate = useNavigate();
     const { loading, error } = useSelector((state) => state.auth);
+    const [message, setMessage] = useState("");
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [submitted, setSubmitted] = useState(false);
@@ -20,8 +21,13 @@ const SendEmail = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(sendEmailRequest(email));
-        setSubmitted(true);
+
+        if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email)) {
+            dispatch(sendEmailRequest(email));
+            setSubmitted(true);
+        }
+
+        setMessage("Invalid email.")
     }
 
     return (
@@ -39,7 +45,7 @@ const SendEmail = () => {
 
                     <button className="modal-button" type='submit' disabled={loading}>Send verification email</button>
 
-                    {error && <span className="error-message">{error}</span>}
+                    {error && <span className="error-message">{error}</span> || message && <span className="error-message">{message}</span>}
                 </form>
             </div>
         </div>

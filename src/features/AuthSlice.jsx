@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
     user: null,
     token: null,
     isAuthenticated: false,
+    verified: false,
     loading: false,
     error: null,
 }
@@ -35,18 +37,22 @@ export const sendEmailRequest = createAsyncThunk("auth/sendemail", async (email,
     }
 })
 
-export const verifyCode = createAsyncThunk("auth/verifyemail", async ({ email, verificationCode }, { rejectWithValue }) => {
+export const verifyCode = createAsyncThunk("auth/verifyemail", async ({ email, code }, { rejectWithValue }) => {
     const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/verify";
+
     try {
         const response = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, verificationCode })
+            body: JSON.stringify({ email, code })
         });
+
+        console.log("JSON: ", JSON.stringify({ email, code }));
+
 
         if (!response.ok) {
             const error = await response.json()
-            const details = error.detail;
+            const details = error.detail || error.message;
 
             if (Array.isArray(details)) {
                 details = [...new Set(details)];
@@ -55,6 +61,8 @@ export const verifyCode = createAsyncThunk("auth/verifyemail", async ({ email, v
                 return rejectWithValue([details || "Faild to verify."]);
             }
         }
+
+        return "Verification successful";
 
     } catch (err) {
         return rejectWithValue(err.message || "Something went wrong when trying to verify.")
@@ -145,11 +153,14 @@ const authSlice = createSlice({
             .addCase(verifyCode.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(verifyCode.fulfilled, (state) => {
+            .addCase(verifyCode.fulfilled, (state, action) => {
                 state.loading = false
+                state.verified = action.payload
             })
-            .addCase(verifyCode.rejected, (state) => {
-                state.loading = false
+            .addCase(verifyCode.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.isAuthenticated = false;
             })
 
             // Sign Up User

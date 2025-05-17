@@ -22,8 +22,6 @@ const Verify = () => {
 
     useEffect(() => {
         if (submitted && !loading && !error) {
-            console.log("Email: ", email);
-
             navigate("/signup/", { state: { email } })
         }
     }, [submitted, loading, error, navigate])
@@ -77,12 +75,27 @@ const Verify = () => {
         }
     }
 
+    // Took help from ChatGpt
+    const extractErrorMessage = () => {
+        if (!error || error.length === 0) return null;
+
+        const match = error[0].match(/{.*}/);
+        if (match) {
+            try {
+                const parsed = JSON.parse(match[0]);
+                return parsed.message;
+
+            } catch {
+                return error[0];
+            }
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const code = inputRefs.current.map(input => input.value).join("");
-        dispatch(verifyCode(email, code))
-        console.log("verification code: ", code);
+
+        dispatch(verifyCode({ email, code }))
         setSubmitted(true);
     }
 
@@ -100,6 +113,8 @@ const Verify = () => {
                         ))}
                     </div>
                     <button type="submit" ref={buttonRef} className="modal-button" disabled={disableBtn}>Verify</button>
+
+                    {extractErrorMessage() && <div className="error-message"><p>{extractErrorMessage()}</p></div>}
                 </form>
             </div>
         </div>
