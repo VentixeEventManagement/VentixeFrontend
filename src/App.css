@@ -86,45 +86,6 @@ a {
   background-color: var(--gray-20);
 }
 
-.sidebar-container-link {
-  margin-bottom: 12px;
-}
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  transition: var(--background-color) 0.3s ease-in-out, color 0.3s ease-in-out;
-  text-decoration: none;
-  color: var(--secondary-100);
-  border-radius: 1rem;
-}
-
-.sidebar-link:hover {
-  background-color: var(--primary-100);
-  color: var(--cool-gray-10);
-}
-
-.sidebar-link.active {
-  position: relative;
-  color: var(--primary-100);
-}
-.sidebar-link.active:hover {
-  background-color: var(--cool-gray-10);
-  color: var(--primary-100);
-}
-.sidebar-link.active::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 10%;
-  bottom: 10%;
-  width: 4px;
-  border-radius: 0 4px 4px 0;
-  background-color: var(--primary-90);
-  transition: all 0.3s ease;
-}
-
 .spinner-wrapper {
   position: fixed;
   top: 0;
@@ -138,8 +99,66 @@ a {
 }
 
 .error-message {
+  display: block;
   width: 100%;
   text-align: center;
   margin-top: 1rem;
   color: red;
+}
+
+.modal-wrapper {
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    width: 500px;
+    padding: 2rem 4rem;
+    border-radius: 1rem;
+    background-color: var(--cool-gray-20);
+}
+
+.modal-header {
+  width: 100%;
+  display: grid;
+}
+
+.modal-header > h1 {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-button {
+    margin-top: 2rem;
+    height: 2.5rem;
+    width: 100%;
+    border: none;
+    border-radius: 2.5rem;
+    cursor: pointer;
+    background-color: var(--primary-100);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--cool-gray-10);
+}
+
+.form-group {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 0.8rem;
+}
+
+.form-group > input {
+    padding-left: 5px;
+    height: 2.5rem;
+    border: none;
+    border-bottom: 1px solid var(--gray-50);
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
 }

@@ -7,6 +7,14 @@
     gap: 12px;
     border: none;
     border-radius: 12px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    background-color: var(--cool-gray-20);
+    transition: var(--cool-gray-20) 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.signout-btn-container:hover {
+    background-color: var(--cool-gray-40);
 }
 
 .signout-btn-container > p {

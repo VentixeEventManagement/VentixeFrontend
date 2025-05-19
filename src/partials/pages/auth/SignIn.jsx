@@ -40,18 +40,20 @@ const SignIn = () => {
   return (
     <div className='modal-wrapper'>
       {loading && <Spinner />}
-      <div className="card">
-        <form onSubmit={handleSubmit}>
+      <div className="modal">
+        <header className="modal-header">
           <h1>Sign In</h1>
+        </header>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <input type="email" id='email' placeholder='Email' onChange={handleEmailChange} required />
+            <input type="email" id='signin-email' placeholder='Email' onChange={handleEmailChange} required />
           </div>
           <div className="form-group">
-            <input type="password" id='password' placeholder='Password' onChange={handlePasswordChange} required />
+            <input type="password" id='signin-password' placeholder='Password' onChange={handlePasswordChange} required />
           </div>
-          <button type='submit' disabled={loading}>Sign in</button>
+          <button className="modal-button" type='submit' disabled={loading}>Sign in</button>
 
-          <span className="signup-redirect">Don't have an account? <a href="/signup">Sign up</a></span>
+          <span className="signup-redirect">Don't have an account? <a href="/sendemail">Sign up</a></span>
 
           {error && <span className="error-message">{error}</span>}
         </form>

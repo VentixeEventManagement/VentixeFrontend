@@ -2,21 +2,22 @@ import React, { lazy, useEffect, useState } from 'react'
 import "./SignUp.css"
 import { signUpUser } from '../../../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Spinner from '../../../components/spinner/Spinner'
 
 const SignUp = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const { loading, error, isAuthenticated } = useSelector((state) => state.auth)
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMismatch, setPasswordMismatch] = useState(false);
+  const email = location.state?.email;
 
   useEffect(() => {
     if (isAuthenticated) {
-      setEmail("");
       setPassword("");
       navigate("/dashboard")
     }
@@ -40,20 +41,23 @@ const SignUp = () => {
   return (
     <div className='modal-wrapper'>
       {loading && <Spinner />}
-      <div className="card">
-        <form onSubmit={handleSubmit}>
+      <div className="modal">
+        <header className="modal-header">
           <h1>Register</h1>
+          <h3>Enter password to sign up</h3>
+        </header>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <input type="email" id='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} required />
+            <input type="email" id='signup-email' placeholder='Email' value={email} readOnly />
           </div>
           <div className="form-group">
-            <input type="password" id='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
+            <input type="password" id='signup-password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <div className="form-group">
-            <input type="password" id='confirmpassword' placeholder='Confirm password' onChange={(e) => setConfirmPassword(e.target.value)} />
+            <input type="password" id='confirm-password' placeholder='Confirm password' onChange={(e) => setConfirmPassword(e.target.value)} required />
             {passwordMismatch && <span className="error-message">Password does not match.</span>}
           </div>
-          <button type='submit' disabled={loading}>Sign up</button>
+          <button className="modal-button" type='submit' disabled={loading}>Sign up</button>
           <span className="signin-redirect">Already have an account? <a href="/login">Sign In</a></span>
 
           {error && <span className="error-message">{error}</span>}

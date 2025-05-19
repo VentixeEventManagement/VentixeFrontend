@@ -5,6 +5,8 @@ import PortalLayout from "../partials/layouts/PortalLayout";
 import Unauthorized from "../partials/pages/auth/Unauthorized";
 
 const NotFound = lazy(() => import("../partials/pages/NotFound"));
+const SendEmail = lazy(() => import("../partials/pages/auth/SendEmail"))
+const Verify = lazy(() => import("../partials/pages/auth/verify/Verify"))
 const SignUp = lazy(() => import("../partials/pages/auth/SignUp"));
 const SignIn = lazy(() => import("../partials/pages/auth/SignIn"));
 const UserDashboard = lazy(() => import("../partials/pages/user/Dashboard"));
@@ -20,6 +22,8 @@ export const routes = [
   {
     layout: AuthLayout,
     children: [
+      { path: "/sendemail", element: <SendEmail /> },
+      { path: "/verify", element: <Verify /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/login", element: <SignIn /> },
       { path: "/denied", element: <Unauthorized /> },
@@ -53,6 +57,8 @@ export const routes = [
   {
     layout: AuthLayout,
     children: [
+      { path: "/sendemail", element: <SendEmail /> },
+      { path: "/verify", element: <Verify /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/login", element: <SignIn /> },
       { path: "/denied", element: <Unauthorized /> },
