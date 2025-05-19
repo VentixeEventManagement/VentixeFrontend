@@ -1,42 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --font: "Inter", sans-serif;
+  --secondary-50: #d3daf9;
+  --secondary-60: #abb4dd;
+  --secondary-70: #707dbf;
+  --secondary-90: #5562a2;
+  --secondary-100: #37437d;
+  --secondary-110: #1c2346;
+
+  --primary-30: #fdedfe;
+  --primary-40: #fce2fe;
+  --primary-50: #fcd3fe;
+  --primary-90: #f589fa;
+  --primary-100: #94359954;
+  --primary-110: #c256c7;
+
+  --yellow-90: #ffefc3;
+  --yellow-100: #ffca39;
+
+  --gray-10: #ffffff;
+  --gray-20: #f7f7f7;
+  --gray-30: #ededed;
+  --gray-40: #e0e0e1;
+  --gray-50: #c3c3c4;
+  --gray-60: #9f9fa1;
+  --gray-70: #777779;
+  --gray-80: #636365;
+  --gray-90: #434345;
+  --gray-100: #1e1e20;
+
+  --cool-gray-10: #eeefff;
+  --cool-gray-20: #e4e5f5;
+  --cool-gray-30: #dddeed;
+  --cool-gray-40: #d1d2e0;
+  --cool-gray-50: #b0b1bd;
+  --cool-gray-60: #8f8f99;
+  --cool-gray-70: #72737a;
+  --cool-gray-80: #56565c;
+  --cool-gray-90: #39393d;
+  --cool-gray-100: #131314;
+
+  --text-color: var(--gray-90);
+  --background-color: var(--gray-10);
+}
+
+.invoice-page-container {
+  background-color: var(--gray-20);
+  border-radius: 12px;
+}
+
+.invoice-list-container {
+  background-color: var(--gray-10);
+  border-radius: 12px;
+  max-width: 394px;
+  padding: 20px;
+  margin: 16px 16px;
+  min-height: 600px;
+}
+
 .invoice-header {
-  color: hotpink;
+  color: var(--gray-100);
   font-weight: 600;
-  font-size: 36px;
+  font-size: 16px;
+}
+
+.invoice-list-ul {
+  padding: 10px;
 }
 
 .invoice-card {
-  background-color: #f26cf9;
+  position: relative;
+  background-color: var(--gray-20);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 12px;
   margin: 16px 0;
+  height: 80px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  max-width: 500px;
-  border-left: 6px solid #5d5d64;
-
   display: grid;
-  
-    grid-template-rows: auto auto auto auto auto 1fr;
+  max-width: 376px;
+  cursor: pointer;
+}
 
-  gap: 0.5rem;
+.invoice-list-id {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: var(--gray-100);
+  font-size: 16px;
 }
 .invoice-list-total-amount {
-  font-size: 24px;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 16px;
+  color: var(--secondary-100);
 }
-
 .invoice-list-due-date {
-  color: brown;
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  color: var(--gray-100);
+  font-size: 12px;
 }
 
 .invoice-list-status {
-  background-color: #f26cf9;
-  color: rgb(43, 40, 40);
-  text-decoration: none;
-  padding: 10px 15px;
-  font-size: 1rem;
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  background-color: var(--primary-50);
+  color: var(--secondary-100);
+  padding: 4px 8px;
+  font-size: 12px;
+
+  border-radius: 8px;
+  width: 4rem;
+}
+
+.selected-invoice-container {
+  position: absolute;
+  margin: 16px 0;
+  top: 107px;
+  left: 888px;
+  transform: translate(-50%, 0);
+  background-color: var(--gray-10);
+  padding: 20px;
+  border: 1px solid var(--gray-10);
+  z-index: 1000;
+  width: 414px;
+  min-height: 600px;
+  border-radius: 8px;
+}
+.header-invoice-details {
+  color: var(--gray-100);
+  font-size: 16px;
   font-weight: 600;
-  border: 1px solid #943599;
-  border-radius: 5px;
-  width: 20rem;
+  padding: 4px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+  min-height: 600;
+}
+
+.second-selected-invoice-container {
+  background-color: var(--gray-20);
+  border-radius: 8px;
+  padding: 20px;
+  height: 0 auto;
+}
+
+.third-selected-invoice-container {
+  background-color: var(--gray-10);
+  border-radius: 8px;
+
+  border-top: 6px solid var(--primary-100);
+  min-height: 400px;
+  padding: 16px;
+}
+
+.invoice-id {
+  color: var(--secondary-100);
+  font-size: 26px;
+  font-weight: 600;
+  padding: 8px;
+}
+
+.invoice-status {
+  background-color: var(--secondary-90);
+  color: var(--gray-10);
+  padding: 4px 8px;
+  font-size: 12px;
+
+  border-radius: 8px;
+  width: 4rem;
+  margin-bottom: 24px;
+}
+
+.invoice-due-date {
+  margin-top: 24px;
+  color: var(--secondary-100);
+}
+.invoice-button {
+  background-color: var(--secondary-50);
+  color: var(--gray-90);
+  text-decoration: none;
+  padding: 8px;
+  font-size: 12px;
+  font-family: var(--font);
+  border: 1px solid var(--secondary-40);
+  border-radius: 12px;
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
+  max-width: 117px;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 4px;
+}
+
+.invoice-delete-button {
+  margin-top: 14px;
+}
+.invoice-button:hover {
+  background-color: var(--secondary-60);
+  color: var(--cool-gray-10);
 }
