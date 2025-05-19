@@ -1,0 +1,28 @@
+.verify-header-text {
+    width: 100%;
+    margin-bottom: 2.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.verify-cubes {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cube {
+    height: 50px;
+    width: 50px;
+    border-radius: 14px;
+    background-color: var(--gray-10);
+    border: none;
+    outline: none;
+    font-size: 2.7rem;
+    font-weight: 600;
+    text-align: center;
+}
