@@ -66,7 +66,7 @@ const Invoices = () => {
 
         {status === "loading" && <Spinner />}
         {status === "failed" && (
-          <p style={{ color: "red" }}>Error: Loading {error}</p>
+          <p style={{ color: "red" }}>Error: Loading API{error}</p>
         )}
         <ul className="invoice-list-ul">
           {invoices.map((invoice) => (
