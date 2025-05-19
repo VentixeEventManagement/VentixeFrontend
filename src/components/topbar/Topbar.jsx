@@ -1,27 +1,53 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "./Topbar.css";
+import ProfileIconBtn from "../profileIconBtn/ProfileIconBtn";
 
 const Topbar = () => {
-  const location = useLocation();
+    const location = useLocation();
 
-  const getTitle = (pathname) => {
-    switch (pathname) {
-      case "/admin/invoices":
-        return "Invoices";
-      //Fyll på med varje path
-    }
-  };
-  return (
-    <>
-      <div className="topbar">
-        <div className="topbar-path">
-          Dashboard / {getTitle(location.pathname)}
+    const getTitle = (pathname) => {
+        switch (pathname) {
+            // Admin user pages
+            case "/admin/dashboard":
+                return "Dashboard";
+            case "/admin/invoices":
+                return "Invoices";
+
+            // No admin user pages
+            case "/dashboard":
+                return "Dashboard";
+            //Fyll på med varje path
+        }
+    };
+    return (
+        <div className="topbar-container header">
+            <div className="topbar">
+                <div className="topbar-path-container">
+                    <div className="topbar-path">
+                        Dashboard / {getTitle(location.pathname)}
+                    </div>
+                    <h1 className="topbar-header">{getTitle(location.pathname)}</h1>
+                </div>
+
+                <div className="search-bar-container">
+                    Serach bar
+                </div>
+
+                <div className="notification-settings-contianer">
+                    Sett Noti
+                </div>
+
+                <div className="profile-info-container">
+                    <ProfileIconBtn />
+                    <div className="name-role">
+                        <h3>Björn Åhström</h3>
+                        <p>Admin</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h1 className="topbar-header">{getTitle(location.pathname)}</h1>
-      </div>
-    </>
-  );
+    );
 };
 
 export default Topbar;

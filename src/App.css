@@ -80,7 +80,7 @@ a {
 }
 
 .header {
-  height: 84px;
+  /* height: 84px; */
   border-radius: 1rem;
   grid-area: header;
   background-color: var(--gray-20);

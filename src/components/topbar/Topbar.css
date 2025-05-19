@@ -1,6 +1,12 @@
-.topbar {
+.topbar-container {
   padding: 12px;
 }
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+}
+
 .topbar-path {
   color: #94359954;
   font-size: 11px;
@@ -9,4 +15,35 @@
 .topbar-header {
   color: #37437d;
   font-size: 24px;
+}
+
+.search-bar-container {
+  height: 100%;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  border: 1px solid gray;
+}
+
+.notification-settings-contianer {
+  margin: 0 1rem;
+}
+
+.profile-info-container {
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.name-role > h3 {
+  padding: 0;
+  margin: 0;
+  color: var(--secondary-100);
+}
+
+.name-role > p {
+  padding: 0;
+  margin: 0;
+  color: var(--gray-70);
 }
