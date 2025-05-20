@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//--Denna fil hanterar faktura-data och API-anrop till/från invoiceprovider--\\
+//Denna fil hanterar faktura-data och API-anrop till/från invoiceprovider--\\
 
 //But ut nedan sedan mot den publika.
 const APIBaseUrl = "http://localhost:5178/api/invoice";
