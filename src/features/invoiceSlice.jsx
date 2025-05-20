@@ -4,7 +4,9 @@ import axios from "axios";
 //Denna fil hanterar faktura-data och API-anrop till/från invoiceprovider--\\
 
 //But ut nedan sedan mot den publika.
-const APIBaseUrl = "http://localhost:5178/api/invoice";
+// const APIBaseUrl = "http://localhost:5178/api/invoice";
+const APIBaseUrl =
+  "https://js-invoiceservice-afccd2cuffeuawe5.swedencentral-01.azurewebsites.net/api/invoice";
 
 //Visa alla fakturor:
 export const fetchInvoices = createAsyncThunk("invoices/fetchAll", async () => {
