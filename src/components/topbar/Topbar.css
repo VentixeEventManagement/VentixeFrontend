@@ -21,8 +21,48 @@
   height: 100%;
   margin-left: 1rem;
   display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.serach-bar {
+  height: 40px;
+  width: 370px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border:  none;
+  background-color: var(--gray-10);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.serach-bar > input {
+  height: 100%;
+  width: 100%;
+  padding-left: 1.5rem;
+  border: none;
+}
+
+.serach-bar > input:focus {
+  outline: none;
+}
+
+.serach-icon-btn {
+  height: 18px;
+  width: 18px;
+  display: flex;
   justify-content: center;
-  border: 1px solid gray;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.serach-icon-btn > img {
+  height: 18px;
+  width: 18px;
 }
 
 .notification-settings-contianer {

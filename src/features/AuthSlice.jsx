@@ -75,7 +75,7 @@ export const signUpUser = createAsyncThunk("auth/signup", async ({ email, passwo
 
         if (!response.ok) {
             const error = await response.json()
-            const details = error.detail || error.message;
+            let details = error.detail || error.message;
 
             if (Array.isArray(details)) {
                 details = [...new Set(details)];
