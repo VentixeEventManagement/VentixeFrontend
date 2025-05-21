@@ -1,0 +1,31 @@
+.profile-image-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "image data";
+    gap: 1rem;
+}
+
+.image-modal {
+    grid-area: image;
+    height: 350px;
+    width: 350px;
+    padding: 0;
+}
+
+.image-card-hedaer {
+    padding: 1rem;
+    width: 100%;
+    border-bottom: 1px solid var(--gray-50);
+}
+
+.image-card-hedaer > h2 {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.account-details-container {
+    grid-area: data;
+    width: 100%;
+}

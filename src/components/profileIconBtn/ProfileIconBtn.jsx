@@ -1,11 +1,17 @@
-import React from 'react'
 import "./ProfileIconBtn.css"
+import { useNavigate } from "react-router-dom"
 
 const ProfileIconBtn = () => {
+    const navigate = useNavigate();
+
+    const goToProfile = () => {
+        navigate("/profile");
+    }
+
     return (
-        <div className="profile-container">
+        <button className="profile-container" onClick={goToProfile}>
             <img src="/profileImages/avatar.svg" alt="Profile image" />
-        </div>
+        </button>
     )
 }
 
