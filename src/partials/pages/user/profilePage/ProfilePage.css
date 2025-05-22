@@ -7,25 +7,118 @@
 
 .image-modal {
     grid-area: image;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     height: 350px;
     width: 350px;
     padding: 0;
 }
 
-.image-card-hedaer {
+.image-hedaer {
     padding: 1rem;
     width: 100%;
     border-bottom: 1px solid var(--gray-50);
 }
 
-.image-card-hedaer > h2 {
+.image-hedaer > h2 {
     width: 100%;
     text-align: center;
     padding: 0;
     margin: 0;
 }
 
+.profile-image {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-image > img {
+    margin-top: 2rem ;
+    height: 150px;
+    width: 150;
+}
+
+.image-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.image-footer > button {
+    height: 36px;
+    width: 170px;
+    margin: 1.5rem 0;
+    border: none;
+    border-radius: 36px;
+    background-color: var(--primary-100);
+    color: var(--cool-gray-10);
+    cursor: pointer;
+}
+
 .account-details-container {
-    grid-area: data;
     width: 100%;
+    grid-area: data;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 0;
+}
+
+.account-details-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--gray-50);
+}
+
+.account-details-header > h2 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.account-details {
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.account-details-left {
+    height: 100%;
+    width: 100%;
+  
+}
+
+.account-details-right {
+    height: 100%;
+    width: 100%;
+}
+
+.account-details-input {
+    height: 40px;
+    width: 100%;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--gray-50);
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.account-details-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.account-details-footer > button {
+    height: 36px;
+    width: 170px;
+    margin: 1.5rem 0;
+    border: none;
+    border-radius: 36px;
+    background-color: var(--primary-100);
+    color: var(--cool-gray-10);
+    cursor: pointer;
 }

@@ -25,6 +25,8 @@ const Topbar = () => {
             // No admin user pages
             case "/dashboard":
                 return "Dashboard";
+            case "/profile":
+                return "Profile"
 
             //Fyll på med varje path
         }
