@@ -30,12 +30,16 @@
 .profile-image {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .profile-image > img {
     margin-top: 2rem ;
     height: 150px;
-    width: 150;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .image-footer {

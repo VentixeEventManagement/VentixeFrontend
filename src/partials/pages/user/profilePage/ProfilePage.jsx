@@ -1,6 +1,33 @@
+import { useRef, useState } from "react";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
+    const [email, setEmail] = useState("bjorn1@domain.com");
+    const [firsName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [city, setCity] = useState("");
+    const [postaCode, setPostalcode] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const fileInputRef = useRef();
+    const [selectedFileName, setSelectedFileName] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
+
+
+    const handleButtonClick = () => {
+        fileInputRef.current.click();
+    }
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setSelectedFileName(file.name);
+            const previewUrl = URL.createObjectURL(file);
+            setImagePreview(previewUrl);
+            console.log("Selected file: ", file);
+
+        }
+    }
+
     return (
         <div className="profile-image-container">
             <aside className="image-modal modal">
@@ -8,10 +35,13 @@ const ProfilePage = () => {
                     <h2>Profile Picture</h2>
                 </div>
                 <div className="profile-image">
-                    <img src="/profileImages/avatar.svg" alt="Profile picture" />
+                    <img src={imagePreview || "/profileImages/avatar.svg"} alt="Profile picture" />
                 </div>
+
+                <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} style={{ display: "none" }} />
+
                 <div className="image-footer">
-                    <button>Upload new image</button>
+                    <button onClick={handleButtonClick}>Upload new image</button>
                 </div>
             </aside>
 
@@ -20,17 +50,17 @@ const ProfilePage = () => {
                     <h2>Account details</h2>
                 </div>
                 <div className="account-details">
-                    <input className="account-details-input" type="email" placeholder="Email" />
+                    <input className="account-details-input" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <div className="account-details-inputs">
                         <div className="account-details-left">
-                            <input className="account-details-input" type="text" placeholder="First name" />
-                            <input className="account-details-input" type="text" placeholder="City" />
-                            <input className="account-details-input" type="text" placeholder="Phone number" />
+                            <input className="account-details-input" type="text" placeholder="First name" value={firsName} onChange={(e) => setFirstName(e.target.value)} />
+                            <input className="account-details-input" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+                            <input className="account-details-input" type="text" placeholder="Phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                         </div>
 
                         <div className="account-details-right">
-                            <input className="account-details-input" type="text" placeholder="Last name" />
-                            <input className="account-details-input" type="text" placeholder="Postal code" />
+                            <input className="account-details-input" type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <input className="account-details-input" type="text" placeholder="Postal code" value={postaCode} onChange={(e) => setPostalcode(e.target.value)} />
                         </div>
                     </div>
 
