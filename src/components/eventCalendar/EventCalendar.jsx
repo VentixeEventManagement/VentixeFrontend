@@ -34,14 +34,16 @@ function EventCalendar() {
   }, []);
 
   return (
-    <div style={{ height: 500 }}>
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: "100%" }}
-      />
+    <div className="event-calendar-container">
+      <div className="event-calendar-card">
+        <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: "70vh", minHeight: 400 }}
+        />
+      </div>
     </div>
   );
 }
