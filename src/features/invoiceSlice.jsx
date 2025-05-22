@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//--Denna fil hanterar faktura-data och API-anrop till/från invoiceprovider--\\
+//Denna fil hanterar faktura-data och API-anrop till/från invoiceprovider--\\
 
 //But ut nedan sedan mot den publika.
-const APIBaseUrl = "http://localhost:5178/api/invoice";
+// const APIBaseUrl = "http://localhost:5178/api/invoice";
+const APIBaseUrl =
+  "https://js-invoiceservice-afccd2cuffeuawe5.swedencentral-01.azurewebsites.net/api/invoice";
 
 //Visa alla fakturor:
 export const fetchInvoices = createAsyncThunk("invoices/fetchAll", async () => {
@@ -17,6 +19,16 @@ export const fetchInvoiceById = createAsyncThunk(
   "invoices/fetchById",
   async (id) => {
     const response = await axios.get(`${APIBaseUrl}/${id}`);
+    return response.data;
+  }
+);
+
+//Editera en faktura:
+export const updateInvoice = createAsyncThunk(
+  "invoices/update",
+  async ({ id, updatedInvoice }, { dispatch }) => {
+    const response = await axios.put(`${APIBaseUrl}/${id}`, updatedInvoice);
+    dispatch(fetchInvoices());
     return response.data;
   }
 );
@@ -55,6 +67,17 @@ const invoiceSlice = createSlice({
       })
       .addCase(fetchInvoiceById.fulfilled, (state, action) => {
         state.selected = action.payload;
+      })
+      .addCase(updateInvoice.fulfilled, (state, action) => {
+        state.selected = action.payload;
+      })
+      .addCase(updateInvoice.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deleteInvoice.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });

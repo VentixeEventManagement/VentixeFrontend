@@ -1,4 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth"
 
 
 const initialState = {
@@ -7,21 +10,72 @@ const initialState = {
     isAuthenticated: false,
     loading: false,
     error: null,
+    succeeded: false,
+    message: "",
 }
+export const sendEmailRequest = createAsyncThunk("auth/sendemail", async (email, { rejectWithValue }) => {
 
-export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rejectWithValue }) => {
-    const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/signup";
     try {
-        console.log(`User Data: ${userData}`);
+        const response = await fetch(`${url}/sendrequest?email=${email}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+        });
 
-        const response = await fetch(url, {
+        if (!response.ok) {
+            const error = await response.json();
+            let details = error.details;
+
+
+            if (Array.isArray(details)) {
+                details = [...new Set(details)];
+                return rejectWithValue(details);
+            } else {
+                return rejectWithValue([details])
+            }
+        }
+
+        return response.ok;
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when sending email.");
+    }
+})
+
+export const verifyCode = createAsyncThunk("auth/verifycode", async ({ email, code }, { rejectWithValue }) => {
+
+    try {
+        const response = await fetch(`${url}/verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({ email, code })
         });
+
         if (!response.ok) {
             const error = await response.json()
-            const details = error.detail;
+            return rejectWithValue(error.detail)
+        }
+
+        return response.ok;
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when trying to verify.")
+    }
+});
+
+export const signUpUser = createAsyncThunk("auth/signup", async ({ email, password }, { rejectWithValue }) => {
+
+    try {
+        console.log(`User Data: ${email} ${password}`);
+
+        const response = await fetch(`${url}/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) {
+            const error = await response.json()
+            const details = error.detail || error.message;
 
             if (Array.isArray(details)) {
                 details = [...new Set(details)];
@@ -41,10 +95,9 @@ export const signUpUser = createAsyncThunk("auth/signup", async (userData, { rej
 
 export const signInUser = createAsyncThunk("auth/signin", async (userData, { rejectWithValue }) => {
 
-    const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/signin";
     try {
 
-        const response = await fetch(url, {
+        const response = await fetch(`${url}/signin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData)
@@ -75,9 +128,17 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+
+        resetStatus: (state) => {
+            state.loading = false;
+            state.error = null;
+            state.succeeded = false;
+            state.message = "";
+        },
+
         simulateLogin: (state) => {
-            state.user = { id: 1, name: "Developer" }; 
-            state.token = "fake-token"; 
+            state.user = { id: 1, name: "Developer" };
+            state.token = "fake-token";
             state.isAuthenticated = true;
             state.error = null;
         },
@@ -85,9 +146,43 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // Send verification email
+            .addCase(sendEmailRequest.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.succeeded = false;
+            })
+            .addCase(sendEmailRequest.fulfilled, (state, action) => {
+                state.loading = false;
+                state.succeeded = action.payload;
+            })
+            .addCase(sendEmailRequest.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.succeeded = false;
+            })
+
+            // Verify code
+            .addCase(verifyCode.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.succeeded = false;
+            })
+            .addCase(verifyCode.fulfilled, (state, action) => {
+                state.loading = false
+                state.succeeded = action.payload
+            })
+            .addCase(verifyCode.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.isAuthenticated = false;
+            })
+
             // Sign Up User
             .addCase(signUpUser.pending, (state) => {
                 state.loading = true;
+                state.error = null;
+                state.succeeded = false;
             })
             .addCase(signUpUser.fulfilled, (state, action) => {
                 state.loading = false;
@@ -104,6 +199,8 @@ const authSlice = createSlice({
             // Sign In User
             .addCase(signInUser.pending, (state) => {
                 state.loading = true;
+                state.error = null;
+                state.succeeded = false;
             })
             .addCase(signInUser.fulfilled, (state, action) => {
                 state.loading = false;
@@ -119,6 +216,5 @@ const authSlice = createSlice({
     },
 });
 
-
-export const { signOut,simulateLogin } = authSlice.actions;
+export const { signOut, resetStatus, simulateLogin } = authSlice.actions;
 export default authSlice.reducer;

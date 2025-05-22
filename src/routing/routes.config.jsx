@@ -5,6 +5,8 @@ import PortalLayout from "../partials/layouts/PortalLayout";
 import Unauthorized from "../partials/pages/auth/Unauthorized";
 
 const NotFound = lazy(() => import("../partials/pages/NotFound"));
+const SendEmail = lazy(() => import("../partials/pages/auth/SendEmail"))
+const Verify = lazy(() => import("../partials/pages/auth/verify/Verify"))
 const SignUp = lazy(() => import("../partials/pages/auth/SignUp"));
 const SignIn = lazy(() => import("../partials/pages/auth/SignIn"));
 
@@ -27,6 +29,8 @@ export const routes = [
   {
     layout: AuthLayout,
     children: [
+      { path: "/sendemail", element: <SendEmail /> },
+      { path: "/verify", element: <Verify /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/login", element: <SignIn /> },
       { path: "/denied", element: <Unauthorized /> },
@@ -57,7 +61,36 @@ export const routes = [
     ],
   },
 
-  // Catch-All Route
+  {
+    children: [{ path: "/", element: <Navigate to="/dashboard" replace /> }],
+  },
+  {
+    layout: AuthLayout,
+    children: [
+      { path: "/sendemail", element: <SendEmail /> },
+      { path: "/verify", element: <Verify /> },
+      { path: "/signup", element: <SignUp /> },
+      { path: "/login", element: <SignIn /> },
+      { path: "/denied", element: <Unauthorized /> },
+    ],
+  },
+  {
+    layout: PortalLayout,
+    protected: true,
+    children: [
+      { path: "/dashboard", element: <UserDashboard /> },
+      { path: "/bookings", element: <UserBookings /> },
+    ],
+  },
+  {
+    layout: PortalLayout,
+    protected: true,
+    adminOnly: true,
+    children: [
+      { path: "/admin/dashboard", element: <AdminDashboard /> },
+      { path: "/admin/bookings", element: <AdminBookings /> },
+    ],
+  },
   {
     children: [{ path: "*", element: <NotFound /> }],
   },

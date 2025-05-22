@@ -6,11 +6,12 @@ import "./Sidebar.css";
 const Sidebar = () => {
   return (
 
-    <>
+    <div className="sidebar-container">
       <div className="logo-sidebar">
         <img src="/logos/VentixeLogoTopOfSidebar.svg" alt="Dashboard icon" />
 
       </div>
+
       <div className="sidebar-container-all-links">
         <div className="sidebar-container-link">
           <NavLink
@@ -81,26 +82,26 @@ const Sidebar = () => {
               fill="currentColor"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M11.584 2.37596C11.8359 2.20801 12.1641 2.20801 12.416 2.37596L21.416 8.37596C21.6247 8.51506 21.75 8.74924 21.75 9V18.75C21.75 19.1478 21.592 19.5294 21.3107 19.8107C21.0294 20.092 20.6478 20.25 20.25 20.25H3.75C3.35218 20.25 2.97065 20.092 2.68934 19.8107C2.40804 19.5294 2.25 19.1478 2.25 18.75V9C2.25 8.74924 2.37533 8.51506 2.58398 8.37596L11.584 2.37596ZM3.75 9.40139V18.75H20.25V9.40139L12 3.90139L3.75 9.40139Z"
                 fill="#currentColor"
               />
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M10.9719 13.8172C11.2109 14.1555 11.1305 14.6235 10.7922 14.8625L3.66717 19.8969C3.32889 20.1359 2.86088 20.0555 2.62185 19.7172C2.38282 19.3789 2.46329 18.9109 2.80158 18.6719L9.92658 13.6375C10.2649 13.3984 10.7329 13.4789 10.9719 13.8172Z"
                 fill="#currentColor"
               />
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M13.0281 13.8172C13.2671 13.4789 13.7351 13.3984 14.0734 13.6375L21.1984 18.6719C21.5367 18.9109 21.6172 19.3789 21.3782 19.7172C21.1391 20.0555 20.6711 20.1359 20.3328 19.8969L13.2078 14.8625C12.8695 14.6235 12.7891 14.1555 13.0281 13.8172Z"
                 fill="#currentColor"
               />
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M2.38944 8.56444C2.62999 8.22723 3.09836 8.14888 3.43556 8.38944L10.5995 13.5H13.4005L20.5644 8.38944C20.9016 8.14888 21.37 8.22723 21.6106 8.56444C21.8511 8.90164 21.7728 9.37001 21.4356 9.61056L14.0762 14.8606C13.9491 14.9513 13.7968 15 13.6406 15H10.3594C10.2032 15 10.0509 14.9513 9.92382 14.8606L2.56444 9.61056C2.22724 9.37001 2.14889 8.90164 2.38944 8.56444Z"
                 fill="#currentColor"
               />
@@ -200,17 +201,19 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <NavLink>
-        <img
-          className="promotional-banner"
-          to=""
-          src="/icons/PromotionalBannerOnSidebar.svg"
-          alt="Promotionalbanner - try new version"
-        />
-      </NavLink>
+      <footer className="sidebar-footer">
+        <NavLink>
+          <img
+            className="promotional-banner"
+            to=""
+            src="/icons/PromotionalBannerOnSidebar.svg"
+            alt="Promotionalbanner - try new version"
+          />
+        </NavLink>
 
-    <SignOutBtn />
-      </>
+        <SignOutBtn />
+      </footer>
+    </div>
   );
 };
 

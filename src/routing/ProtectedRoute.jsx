@@ -6,8 +6,6 @@ const ProtectedRoute = ({ children }) => {
         const [cookies] = useCookies(['cookie-userId']);
         const userId = cookies.userId;
 
-        console.log("isAuthenticated ", userId);
-
         if (userId) {
             return children
         }
