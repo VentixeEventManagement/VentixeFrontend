@@ -20,12 +20,20 @@ const ProfilePage = () => {
                     <h2>Account details</h2>
                 </div>
                 <div className="account-details">
-                    <div className="account-details-left">
-                        <input className="account-details-input" type="text" placeholder="First name" />
+                    <input className="account-details-input" type="email" placeholder="Email" />
+                    <div className="account-details-inputs">
+                        <div className="account-details-left">
+                            <input className="account-details-input" type="text" placeholder="First name" />
+                            <input className="account-details-input" type="text" placeholder="City" />
+                            <input className="account-details-input" type="text" placeholder="Phone number" />
+                        </div>
+
+                        <div className="account-details-right">
+                            <input className="account-details-input" type="text" placeholder="Last name" />
+                            <input className="account-details-input" type="text" placeholder="Postal code" />
+                        </div>
                     </div>
-                    <div className="account-details-right">
-                        <input className="account-details-input" type="text" placeholder="Last name" />
-                    </div>
+
                 </div>
                 <div className="account-details-footer">
                     <button>Save</button>
