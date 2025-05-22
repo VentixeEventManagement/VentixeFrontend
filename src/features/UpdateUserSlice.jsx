@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const url = "";
+const url = "https://profileserviceprovider.azurewebsites.net/api/User/update";
 
 const initialState = {
     token: null,
@@ -14,19 +14,29 @@ export const updateUser = createAsyncThunk("user/update", async (user, { rejectW
 
     try {
 
-        const response = fetch(url, {
+        const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-API-KEY": "34023b33-ab56-4925-add5-03666cf294a3"
-            }
+            },
+            body: JSON.stringify(user)
         });
 
         if (!response.ok) {
             const error = await response.json();
-            console.log("ERROR RESPONSE: ", error);
+            let errors = error.errors;
+
+            if (errors) {
+                return rejectWithValue(errors.UserId[0]);
+            }
+
+            return rejectWithValue(error);
 
         };
+
+        const json = await response.json();
+        return json;
 
     } catch (err) {
         return rejectWithValue(err.message || "Something went wrong when updating user.");
@@ -52,10 +62,11 @@ const updateSlice = createSlice({
                 state.succeeded = action.payload;
             })
             .addCase(updateUser.rejected, (state, action) => {
-                tate.loading = false;
+                state.loading = false;
                 state.error = action.payload;
                 state.succeeded = false;
             })
     }
 })
 
+export default updateSlice.reducer;

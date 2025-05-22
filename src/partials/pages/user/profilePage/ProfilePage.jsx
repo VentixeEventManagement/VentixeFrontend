@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../../../features/UpdateUserSlice";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
+    const dispatch = useDispatch();
+    const { loading, error, succeeded } = useSelector((state) => state.update);
+
     const [email, setEmail] = useState("bjorn1@domain.com");
     const [firsName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -26,6 +31,16 @@ const ProfilePage = () => {
             console.log("Selected file: ", file);
 
         }
+    }
+
+    const handleUpdate = () => {
+        console.log("KLICKELIKLICK");
+
+        const user = {
+            firstName: "test"
+        }
+
+        dispatch(updateUser(user));
     }
 
     return (
@@ -66,7 +81,7 @@ const ProfilePage = () => {
 
                 </div>
                 <div className="account-details-footer">
-                    <button>Save</button>
+                    <button onClick={handleUpdate}>Save</button>
                 </div>
             </div>
         </div>
