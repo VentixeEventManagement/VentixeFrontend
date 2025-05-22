@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../../../features/UpdateUserSlice";
+import { updateUser } from "../../../../features/ProfileInfoSlice";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
