@@ -23,7 +23,7 @@ const EventViewer = () => {
     };
 
     return (
-        <div>
+        <div className="event-viewer-container">
             {status === "loading" && <p>Loading events...</p>}
             {status === "failed" && <p>Error: {error}</p>}
             <div className="event-list">
@@ -68,9 +68,14 @@ const EventViewer = () => {
                         <p>
                             <strong>Tickets Available:</strong> {selectedEvent.ticketAmount}
                         </p>
-                        <button className="event-modal-close" onClick={closeDialog}>
-                            Close
-                        </button>
+                        <div className="event-modal-actions">
+                            <button className="event-modal-close" onClick={closeDialog}>
+                                Close
+                            </button>
+                            <button className="event-modal-Purchase" onClick={closeDialog}>
+                                Purchase
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
