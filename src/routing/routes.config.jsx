@@ -19,6 +19,8 @@ const Invoices = lazy(() => import("../partials/pages/admin/Invoices"));
 const UserEvents = lazy(() => import("../partials/pages/user/Events"));
 const AdminEvents = lazy(() => import("../partials/pages/admin/Events"));
 
+const Calendar = lazy(() => import("../partials/pages/user/Calendar"));
+
 export const routes = [
   // Root Redirect
   {
@@ -45,6 +47,7 @@ export const routes = [
       { path: "/dashboard", element: <UserDashboard /> },
       { path: "/bookings", element: <UserBookings /> },
       { path: "/events", element: <UserEvents /> },
+      { path: "/calendar", element: <Calendar /> },
     ],
   },
 
