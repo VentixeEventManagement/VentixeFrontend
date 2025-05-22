@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import enUS from "date-fns/locale/en-US";
+import "./EventCalendar.css";
 
 const locales = {
   "en-US": enUS,
