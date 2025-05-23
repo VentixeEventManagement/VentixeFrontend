@@ -30,6 +30,8 @@ const Topbar = () => {
         }
     }, [profileInfo, profileImage])
 
+
+
     const getTitle = (pathname) => {
 
         switch (pathname) {
@@ -50,36 +52,41 @@ const Topbar = () => {
     };
 
     return (
-        <div className="topbar-container header">
-            <div className="topbar">
-                <div className="topbar-path-container">
-                    <div className="topbar-path">
-                        Dashboard / {getTitle(location.pathname)}
+        <div>
+            <div className="topbar-container">
+                <div className="topbar">
+                    <div className="topbar-path-container">
+                        <div className="topbar-path">
+                            Dashboard / {getTitle(location.pathname)}
+                        </div>
+                        <h1 className="topbar-header">{getTitle(location.pathname)}</h1>
                     </div>
-                    <h1 className="topbar-header">{getTitle(location.pathname)}</h1>
-                </div>
 
-                <div className="search-bar-container">
-                    <div className="serach-bar">
-                        <input placeholder="Search"></input>
-                        <button className="serach-icon-btn">
-                            <img src="/icons/SearchIcon.svg" alt="search Icon" />
-                        </button>
+                    <div className="search-bar-container">
+                        <div className="serach-bar">
+                            <input placeholder="Search"></input>
+                            <button className="serach-icon-btn">
+                                <img src="/icons/SearchIcon.svg" alt="search Icon" />
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div className="notification-settings-contianer">
+                    <div className="notification-settings-contianer">
 
-                </div>
-
-                <div className="profile-info-container">
-                    <ProfileIconBtn profileImage={profileImage} />
-                    <div className="name-role">
-                        <h3>{name}</h3>
-                        <p>{roleName}</p>
                     </div>
+
+                    <div className="profile-info-container">
+                        <ProfileIconBtn profileImage={profileImage} />
+                        <div className="name-role">
+                            <h3>{name}</h3>
+                            <p>{roleName}</p>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
+            {/* <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} /> */}
         </div>
     );
 };

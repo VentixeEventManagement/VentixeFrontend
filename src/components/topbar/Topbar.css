@@ -3,7 +3,7 @@
 }
 .topbar {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto auto;
   align-items: center;
 }
 
@@ -90,7 +90,7 @@
 
 /* Mobile: max-width 639px */
 @media (max-width: 639px) {
-  .header{
+  .topbar-container{
     display: none;
   }
 }
