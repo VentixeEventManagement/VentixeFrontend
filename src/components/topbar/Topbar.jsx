@@ -9,7 +9,7 @@ import { getUserInfo } from "../../features/ProfileInfoSlice";
 const Topbar = () => {
     const location = useLocation();
     const dispatch = useDispatch();
-    const { loading, error, succeeded, profileInfo } = useSelector((state) => state.profileInfo);
+    const { loading, error, succeeded, profileInfo, profileImageUpdated } = useSelector((state) => state.profileInfo);
     const [cookies] = useCookies(["cookie-userId", "cookie-role"]);
     const [roleName, setRoleName] = useState("");
     const [name, setName] = useState("");
@@ -21,14 +21,14 @@ const Topbar = () => {
 
     useEffect(() => {
         dispatch(getUserInfo(cookies.userId));
-    }, [dispatch, cookies.userId])
+    }, [dispatch, cookies.userId, profileImageUpdated])
 
     useEffect(() => {
-        if (succeeded) {
+        if (profileInfo) {
             setName(`${profileInfo.firstName} ${profileInfo.lastName}`);
             setProfileImage(profileInfo.profileImageUrl)
         }
-    }, [succeeded])
+    }, [profileInfo, profileImage])
 
     const getTitle = (pathname) => {
 

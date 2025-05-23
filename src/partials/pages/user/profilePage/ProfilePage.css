@@ -119,6 +119,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    gap: 2rem;
 }
 
 .account-details-footer > button {

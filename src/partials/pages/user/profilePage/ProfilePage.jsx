@@ -5,8 +5,10 @@ import { getAccountInfo } from "../../../../features/AuthSlice";
 import { useCookies } from "react-cookie";
 import Spinner from "../../../../components/spinner/Spinner";
 import "./ProfilePage.css";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const fileInputRef = useRef();
     const { loading: profileLoading, error: profileError, succeeded: profileSucceeded, profileInfo } = useSelector((state) => state.profileInfo);
@@ -19,9 +21,10 @@ const ProfilePage = () => {
     const [city, setCity] = useState("");
     const [postaCode, setPostalcode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-
     const [selectedFile, setSelectedFile] = useState(null);
     const [imagePreview, setImagePreview] = useState("/profileImages/avatar.svg");
+
+    const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         dispatch(getUserInfo(cookies.userId));
@@ -39,7 +42,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
 
-        if (profileSucceeded) {
+        if (profileInfo) {
             if (profileInfo?.profileImageUrl && !selectedFile) {
                 setImagePreview(profileInfo.profileImageUrl);
             }
@@ -49,9 +52,9 @@ const ProfilePage = () => {
             setCity(profileInfo.city || "");
             setPostalcode(profileInfo.postalCode || "");
         }
-    }, [profileSucceeded, selectedFile])
+    }, [profileInfo, selectedFile])
 
-    const handleButtonClick = () => {
+    const handleUploadNewImage = () => {
         fileInputRef.current.click();
     }
 
@@ -65,15 +68,25 @@ const ProfilePage = () => {
     }
 
     const handleUpdate = () => {
+        if (isEditing) {
+            const user = {
+                userId: cookies.userId,
+                selectedFile: selectedFile,
+                firstName: firstName,
+                lastName: lastName
+            };
 
-        const user = {
-            userId: cookies.userId,
-            selectedFile: selectedFile,
-            firstName: firstName,
-            lastName: lastName
-        };
+            // if (!ifNewFile && selectedFile) {
+            //     user.selectedFile = selectedFile;
+            // }
 
-        dispatch(updateUser(user));
+            dispatch(updateUser(user));
+        }
+        setIsEditing(prev => !prev);
+    }
+
+    const handleClose = () => {
+        navigate("/dashboard");
     }
 
     return (
@@ -90,7 +103,7 @@ const ProfilePage = () => {
                 <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} style={{ display: "none" }} />
 
                 <div className="image-footer">
-                    <button onClick={handleButtonClick}>Upload new image</button>
+                    <button disabled={!isEditing} onClick={handleUploadNewImage}>Upload new image</button>
                 </div>
             </aside>
             <div className="account-details-container modal">
@@ -101,20 +114,21 @@ const ProfilePage = () => {
                     <input className="account-details-input" type="email" disabled={true} placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <div className="account-details-inputs">
                         <div className="account-details-left">
-                            <input className="account-details-input" type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                            <input className="account-details-input" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-                            <input className="account-details-input" type="text" placeholder="Phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                            <input className="account-details-input" type="text" disabled={!isEditing} placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            <input className="account-details-input" type="text" disabled={!isEditing} placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+                            <input className="account-details-input" type="text" disabled={!isEditing} placeholder="Phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                         </div>
 
                         <div className="account-details-right">
-                            <input className="account-details-input" type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                            <input className="account-details-input" type="text" placeholder="Postal code" value={postaCode} onChange={(e) => setPostalcode(e.target.value)} />
+                            <input className="account-details-input" type="text" disabled={!isEditing} placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <input className="account-details-input" type="text" disabled={!isEditing} placeholder="Postal code" value={postaCode} onChange={(e) => setPostalcode(e.target.value)} />
                         </div>
                     </div>
                 </div>
 
                 <div className="account-details-footer">
-                    <button onClick={handleUpdate}>Update</button>
+                    <button onClick={handleUpdate}>{isEditing ? "Update" : "Edit"}</button>
+                    <button onClick={handleClose}>Close</button>
                 </div>
             </div>
         </div>

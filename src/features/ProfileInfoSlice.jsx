@@ -9,6 +9,7 @@ const initialState = {
     error: null,
     succeeded: false,
     message: "",
+    profileImageUpdated: false,
 }
 
 export const getUserInfo = createAsyncThunk("user/get", async (userId, { rejectWithValue }) => {
@@ -54,11 +55,6 @@ export const updateUser = createAsyncThunk("user/update", async (user, { rejectW
         if (user.selectedFile) {
             formData.append("profileImageUri", user.selectedFile, user.selectedFile.name);
         }
-
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ": " + pair[1]);
-        }
-
 
         const response = await fetch(`${url}/update`, {
             method: "POST",
@@ -124,6 +120,7 @@ const updateSlice = createSlice({
             .addCase(updateUser.fulfilled, (state) => {
                 state.loading = false;
                 state.succeeded = true;
+                state.profileImageUpdated = true;
             })
             .addCase(updateUser.rejected, (state, action) => {
                 state.loading = false;

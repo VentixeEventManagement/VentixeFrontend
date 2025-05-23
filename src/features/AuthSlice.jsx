@@ -94,7 +94,6 @@ export const verifyCode = createAsyncThunk("auth/verifycode", async ({ email, co
 export const signUpUser = createAsyncThunk("auth/signup", async ({ email, password }, { rejectWithValue }) => {
 
     try {
-        console.log(`User Data: ${email} ${password}`);
 
         const response = await fetch(`${url}/signup`, {
             method: "POST",
