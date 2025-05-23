@@ -27,3 +27,26 @@
     width: 24px;
     color: var(--secondary-100);
 }
+
+
+@media (min-width: 640px) and (max-width: 1023px)  {
+    .signout-btn-container {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+
+    .signout-btn-container > img {
+        height: 18px;
+        width: 18px;
+    }
+    
+    .signout-btn-container > p {
+        display: none;
+    }
+}

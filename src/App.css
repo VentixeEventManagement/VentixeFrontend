@@ -43,6 +43,10 @@
 
   --text-color: var(--gray-90);
   --background-color: var(--gray-10);
+
+  --breakpoint-mobile: 639px;
+  --breakpoint-tablet: 1023px;
+  --breakpoint-desktop: 1024px;
 }
 
 *,
@@ -64,9 +68,6 @@ body {
 
 a {
   text-decoration: none;
-}
-
-.auth-layout {
 }
 
 .portal-layout {
@@ -161,4 +162,22 @@ a {
     outline: none;
     cursor: pointer;
     background-color: transparent;
+}
+
+/* Mobile: max-width 639px */
+@media (max-width: 639px) {
+
+  .topbar-container {
+    display: none;
+  }
+}
+
+/* Tablet: 640px to 1023px */
+@media (min-width: 640px) and (max-width: 1023px) {
+ 
+}
+
+/* Desktop: 1024px and up */
+@media (min-width: 1024px) {
+  
 }

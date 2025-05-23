@@ -9,7 +9,9 @@ const Sidebar = () => {
     <div className="sidebar-container">
       <div className="logo-sidebar">
         <img src="/logos/VentixeLogoTopOfSidebar.svg" alt="Dashboard icon" />
-
+      </div>
+      <div className="logo-tablet-sidebar">
+        <img src="/icons/tabletLogo.svg" alt="Logo icon" />
       </div>
 
       <div className="sidebar-container-all-links">
@@ -32,7 +34,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Dashboard
+            <span className="sidebar-link-text">Dashboard</span>
           </NavLink>
         </div>
 
@@ -50,7 +52,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Bookings
+            <span className="sidebar-link-text">Bookings</span>
           </NavLink>
         </div>
 
@@ -68,7 +70,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Invoices
+            <span className="sidebar-link-text">Invoices</span>
           </NavLink>
         </div>
 
@@ -106,7 +108,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Inbox
+            <span className="sidebar-link-text">Inbox</span>
           </NavLink>
         </div>
 
@@ -124,7 +126,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Calendar
+            <span className="sidebar-link-text">Calendar</span>
           </NavLink>
         </div>
 
@@ -142,7 +144,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Events
+            <span className="sidebar-link-text">Events</span>
           </NavLink>
         </div>
 
@@ -160,7 +162,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Financials
+            <span className="sidebar-link-text">Financials</span>
           </NavLink>
         </div>
 
@@ -178,7 +180,7 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Gallery
+            <span className="sidebar-link-text">Gallery</span>
           </NavLink>
         </div>
 
@@ -196,13 +198,13 @@ const Sidebar = () => {
                 fill="#currentColor"
               />
             </svg>
-            Feedback
+            <span className="sidebar-link-text">Feedback</span>
           </NavLink>
         </div>
       </div>
 
       <footer className="sidebar-footer">
-        <NavLink>
+        <NavLink className="promotional-banner-link">
           <img
             className="promotional-banner"
             to=""
@@ -211,7 +213,7 @@ const Sidebar = () => {
           />
         </NavLink>
 
-        <SignOutBtn />
+        <SignOutBtn className="side-bar-signout"/>
       </footer>
     </div>
   );
