@@ -11,7 +11,7 @@ const initialState = {
     message: "",
 }
 
-export const getUser = createAsyncThunk("user/get", async (userId, { rejectWithValue }) => {
+export const getUserInfo = createAsyncThunk("user/get", async (userId, { rejectWithValue }) => {
 
     try {
 
@@ -99,17 +99,17 @@ const updateSlice = createSlice({
         builder
 
             // Get profile information
-            .addCase(getUser.pending, (state) => {
+            .addCase(getUserInfo.pending, (state) => {
                 state.loading = true;
                 state.error = null;
                 state.succeeded = false;
             })
-            .addCase(getUser.fulfilled, (state, action) => {
+            .addCase(getUserInfo.fulfilled, (state, action) => {
                 state.loading = false;
                 state.profileInfo = action.payload;
                 state.succeeded = true;
             })
-            .addCase(getUser.rejected, (state, action) => {
+            .addCase(getUserInfo.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
                 state.succeeded = false;

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser, getUser } from "../../../../features/ProfileInfoSlice";
+import { updateUser, getUserInfo as getUserInfo } from "../../../../features/ProfileInfoSlice";
 import { getAccountInfo } from "../../../../features/AuthSlice";
 import { useCookies } from "react-cookie";
 import Spinner from "../../../../components/spinner/Spinner";
@@ -9,8 +9,8 @@ import "./ProfilePage.css";
 const ProfilePage = () => {
     const dispatch = useDispatch();
     const fileInputRef = useRef();
-    const { loading, error, succeeded, profileInfo } = useSelector((state) => state.profileInfo);
-    const { user } = useSelector((state) => state.auth);
+    const { loading: profileLoading, error: profileError, succeeded: profileSucceeded, profileInfo } = useSelector((state) => state.profileInfo);
+    const { user, succeeded: userSucceeded, loading: userLoading } = useSelector((state) => state.auth);
     const [cookies] = useCookies(["cookie-userId", "cookie-role"]);
 
     const [email, setEmail] = useState("bjorn1@domain.com");
@@ -24,7 +24,7 @@ const ProfilePage = () => {
     const [imagePreview, setImagePreview] = useState("/profileImages/avatar.svg");
 
     useEffect(() => {
-        dispatch(getUser(cookies.userId));
+        dispatch(getUserInfo(cookies.userId));
 
     }, [cookies.userId, dispatch])
 
@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
 
-        if (profileInfo) {
+        if (profileSucceeded) {
             if (profileInfo?.profileImageUrl && !selectedFile) {
                 setImagePreview(profileInfo.profileImageUrl);
             }
@@ -49,7 +49,7 @@ const ProfilePage = () => {
             setCity(profileInfo.city || "");
             setPostalcode(profileInfo.postalCode || "");
         }
-    }, [profileInfo, selectedFile])
+    }, [profileSucceeded, selectedFile])
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
@@ -78,7 +78,7 @@ const ProfilePage = () => {
 
     return (
         <div className="profile-image-container">
-            {loading && <Spinner />}
+            {profileLoading || userLoading && <Spinner />}
             <aside className="image-modal modal">
                 <div className="image-hedaer">
                     <h2>Profile Picture</h2>

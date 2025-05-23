@@ -1,7 +1,7 @@
 import "./ProfileIconBtn.css"
 import { useNavigate } from "react-router-dom"
 
-const ProfileIconBtn = () => {
+const ProfileIconBtn = ({ profileImage }) => {
     const navigate = useNavigate();
 
     const goToProfile = () => {
@@ -10,7 +10,7 @@ const ProfileIconBtn = () => {
 
     return (
         <button className="profile-container" onClick={goToProfile}>
-            <img src="/profileImages/avatar.svg" alt="Profile image" />
+            <img src={profileImage ?? "/profileImages/avatar.svg"} alt="Profile image" />
         </button>
     )
 }

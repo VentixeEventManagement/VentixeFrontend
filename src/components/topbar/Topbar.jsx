@@ -3,15 +3,32 @@ import { useLocation } from "react-router-dom";
 import "./Topbar.css";
 import ProfileIconBtn from "../profileIconBtn/ProfileIconBtn";
 import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo } from "../../features/ProfileInfoSlice";
 
 const Topbar = () => {
     const location = useLocation();
-    const [cookies] = useCookies(["cookie-role"]);
+    const dispatch = useDispatch();
+    const { loading, error, succeeded, profileInfo } = useSelector((state) => state.profileInfo);
+    const [cookies] = useCookies(["cookie-userId", "cookie-role"]);
     const [roleName, setRoleName] = useState("");
+    const [name, setName] = useState("");
+    const [profileImage, setProfileImage] = useState(null);
 
     useEffect(() => {
         setRoleName(cookies.role);
     }, [cookies])
+
+    useEffect(() => {
+        dispatch(getUserInfo(cookies.userId));
+    }, [dispatch, cookies.userId])
+
+    useEffect(() => {
+        if (succeeded) {
+            setName(`${profileInfo.firstName} ${profileInfo.lastName}`);
+            setProfileImage(profileInfo.profileImageUrl)
+        }
+    }, [succeeded])
 
     const getTitle = (pathname) => {
 
@@ -52,13 +69,13 @@ const Topbar = () => {
                 </div>
 
                 <div className="notification-settings-contianer">
-                    Sett Noti
+
                 </div>
 
                 <div className="profile-info-container">
-                    <ProfileIconBtn />
+                    <ProfileIconBtn profileImage={profileImage} />
                     <div className="name-role">
-                        <h3>Björn Åhström</h3>
+                        <h3>{name}</h3>
                         <p>{roleName}</p>
                     </div>
                 </div>
