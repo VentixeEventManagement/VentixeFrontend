@@ -27,7 +27,7 @@
 }
 
  @media (width >= 640px) {
-    .mobile-topbar-wrapper {
+    .app-wrapper {
         display: none;
     }
   }

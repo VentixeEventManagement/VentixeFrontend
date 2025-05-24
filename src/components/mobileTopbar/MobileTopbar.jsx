@@ -14,7 +14,7 @@ const MobileTopbar = () => {
         setIsMenuOpen(false);
     };
     return (
-        <div>
+        <div className="app-wrapper">
             <div className="mobile-topbar-wrapper">
                 <div className="mobile-topbar-container">
                     <div className="menu-logo">

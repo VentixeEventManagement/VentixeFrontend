@@ -5,7 +5,7 @@
     background-color: var(--gray-20);
 
     @media (width < 640px) {
-    margin-top: 71px;
+    margin-top: 65px;
   }
 }
 
