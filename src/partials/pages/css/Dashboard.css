@@ -1,0 +1,14 @@
+.dashboard-container {
+    height: 100dvh;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--gray-20);
+
+    @media (width < 640px) {
+    margin-top: 71px;
+  }
+}
+
+.dashboard-header {
+    margin: 0;
+}

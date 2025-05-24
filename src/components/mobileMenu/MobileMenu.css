@@ -1,0 +1,25 @@
+.menu-container {
+    position: absolute;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    top: 71px;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    background-color: var(--cool-gray-20);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.menu-container.open {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+@media (width >= 640px) {
+    .menu-container {
+        display: none;
+    }
+}

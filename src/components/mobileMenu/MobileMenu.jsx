@@ -1,5 +1,6 @@
 import "./MobileMenu.css";
 import { NavLink } from "react-router-dom";
+import "./MobileMenu.css"
 
 const MobileMenu = ({ isOpen, onClose }) => {
 
@@ -8,11 +9,12 @@ const MobileMenu = ({ isOpen, onClose }) => {
     }
 
     return (
-        <div className={`"menu-container" ${isOpen ? "open" : ""}`} >
+        <div className={`menu-container ${isOpen ? "open" : ""}`} >
             <div className="menu-links">
                 <div className="sidebar-container-all-links">
                     <div className="sidebar-container-link">
                         <NavLink
+                            onClick={handleOnClose}
                             className={({ isActive }) =>
                                 isActive ? "sidebar-link active" : "sidebar-link"
                             }
@@ -35,7 +37,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -53,7 +57,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="/admin/invoices">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="/admin/invoices">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -71,7 +77,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -109,7 +117,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -127,7 +137,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -145,7 +157,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -163,7 +177,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -181,7 +197,9 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="sidebar-container-link">
-                        <NavLink className="sidebar-link" to="">
+                        <NavLink
+                            onClick={handleOnClose}
+                            className="sidebar-link" to="">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"

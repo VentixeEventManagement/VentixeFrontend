@@ -3,24 +3,15 @@ import { Outlet } from 'react-router-dom'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import HamburgerIcon from '../../components/hamburgerIcon/HamburgerIcon'
+import MobileTopbar from '../../components/mobileTopbar/MobileTopbar'
 
 const PortalLayout = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prevState) => !prevState);
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
+  
   return (
     <div className="portal-layout">
-        <HamburgerIcon onClicked={toggleMenu} isActive={isMenuOpen} />
-
       <Sidebar />
 
+      <MobileTopbar />
       <header className='header'>
         <Topbar />
       </header>

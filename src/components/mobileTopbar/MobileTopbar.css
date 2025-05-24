@@ -1,0 +1,33 @@
+.mobile-topbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 12px 0 12px;
+    background-color: var(--background-color);
+    z-index: 20;
+}
+
+.mobile-topbar-container {
+    position: relative;
+    height: 60px;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    background-color: var(--cool-gray-20);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    z-index: 15;
+}
+
+.menu-logo > img {
+    height: 32px;
+    width: 32px;
+}
+
+ @media (width >= 640px) {
+    .mobile-topbar-wrapper {
+        display: none;
+    }
+  }
