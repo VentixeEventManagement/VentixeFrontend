@@ -4,10 +4,11 @@ import SignOutBtn from "../signOutBtn/SignOutBtn";
 import "./Sidebar.css";
 
 const Sidebar = () => {
+
   return (
 
     <div className="sidebar">
-      
+
       <div className="logo">
         <img src="/icons/tabletLogo.svg" alt="Logo icon" />
         <span>Ventixe</span>
@@ -113,7 +114,7 @@ const Sidebar = () => {
           </div>
 
           <div className="sidebar-container-link">
-            <NavLink className="sidebar-link" to="">
+            <NavLink className="sidebar-link" to="/calendar">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -131,7 +132,7 @@ const Sidebar = () => {
           </div>
 
           <div className="sidebar-container-link">
-            <NavLink className="sidebar-link" to="">
+            <NavLink className="sidebar-link" to="/events">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

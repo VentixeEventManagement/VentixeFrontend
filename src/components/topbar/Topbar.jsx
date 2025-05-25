@@ -46,6 +46,10 @@ const Topbar = () => {
                 return "Dashboard";
             case "/profile":
                 return "Profile"
+            case "/events":
+                return "Events";
+            case "/calendar":
+                return "Calendar"
 
             //Fyll på med varje path
         }

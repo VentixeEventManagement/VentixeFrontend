@@ -30,6 +30,10 @@ const MobileTopbar = () => {
                 return "Dashboard";
             case "/profile":
                 return "Profile"
+            case "/events":
+                return "Events";
+            case "/calendar":
+                return "Events";
 
             //Fyll på med varje path
         }

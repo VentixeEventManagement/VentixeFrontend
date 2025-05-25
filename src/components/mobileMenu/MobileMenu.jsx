@@ -119,7 +119,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     <div className="sidebar-container-link">
                         <NavLink
                             onClick={handleOnClose}
-                            className="sidebar-link" to="">
+                            className="sidebar-link" to="/calendar">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -139,7 +139,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     <div className="sidebar-container-link">
                         <NavLink
                             onClick={handleOnClose}
-                            className="sidebar-link" to="">
+                            className="sidebar-link" to="/events">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
