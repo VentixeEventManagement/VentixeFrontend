@@ -26,6 +26,12 @@
     width: 32px;
 }
 
+.menu-page-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
  @media (width >= 640px) {
     .app-wrapper {
         display: none;
