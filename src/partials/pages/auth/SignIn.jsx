@@ -12,14 +12,15 @@ const SignIn = () => {
   const { user, loading, error, isAuthenticated } = useSelector((state) => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-userId']);
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-userId', "cookie-role"]);
 
   useEffect(() => {
     if (isAuthenticated) {
       setEmail("");
       setPassword("");
       navigate("/dashboard")
-      setCookie("userId", user.userId, { path: "/" })
+      setCookie("userId", user.userId, { path: "/" });
+      setCookie("userRole", user.roleName, { path: "/" });
     }
   }, [isAuthenticated, navigate])
 

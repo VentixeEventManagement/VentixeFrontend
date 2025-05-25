@@ -20,7 +20,7 @@ const Verify = () => {
     })
 
     useEffect(() => {
-        if (!succeeded) {
+        if (succeeded) {
             navigate("/signup/", { state: { email } })
             dispatch(resetStatus());
         }

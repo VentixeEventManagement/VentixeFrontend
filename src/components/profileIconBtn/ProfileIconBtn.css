@@ -1,6 +1,18 @@
 .profile-container {
+    position: relative;
     height: 40px;
     width: 40px;
-    border: 1px solid black;
+    border: none;
+    background-color: transparent;
     border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container > img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }

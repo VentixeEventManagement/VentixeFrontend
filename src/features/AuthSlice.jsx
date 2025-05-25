@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
-const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth"
+const url = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth";
+const accountUrl = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-01.azurewebsites.net/api/Auth/getaccount?userId=";
 
 
 const initialState = {
@@ -13,6 +13,35 @@ const initialState = {
     succeeded: false,
     message: "",
 }
+
+export const getAccountInfo = createAsyncThunk("auth/accountInfo", async (userId, { rejectWithValue }) => {
+
+    try {
+        const response = await fetch(`${accountUrl}${userId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            let details = error.details;
+
+
+            if (Array.isArray(details)) {
+                details = [...new Set(details)];
+                return rejectWithValue(details);
+            } else {
+                return rejectWithValue([details])
+            }
+        }
+
+        const json = await response.json();
+        return json.account;
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when sending email.");
+    }
+})
 export const sendEmailRequest = createAsyncThunk("auth/sendemail", async (email, { rejectWithValue }) => {
 
     try {
@@ -65,7 +94,6 @@ export const verifyCode = createAsyncThunk("auth/verifycode", async ({ email, co
 export const signUpUser = createAsyncThunk("auth/signup", async ({ email, password }, { rejectWithValue }) => {
 
     try {
-        console.log(`User Data: ${email} ${password}`);
 
         const response = await fetch(`${url}/signup`, {
             method: "POST",
@@ -146,6 +174,24 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            // Get account info
+            .addCase(getAccountInfo.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.succeeded = false;
+            })
+            .addCase(getAccountInfo.fulfilled, (state, action) => {
+                state.loading = false;
+                state.succeeded = true;
+                state.user = action.payload;
+            })
+            .addCase(getAccountInfo.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.succeeded = false;
+            })
+
             // Send verification email
             .addCase(sendEmailRequest.pending, (state) => {
                 state.loading = true;

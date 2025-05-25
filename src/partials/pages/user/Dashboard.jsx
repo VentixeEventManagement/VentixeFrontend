@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { increment, decrement, incrementByAmount } from '../../../features/counterSlice';
 import { Link } from 'react-router-dom';
+import "../css/Dashboard.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      <h1>User Dashboard</h1>
+    <div className="dashboard-container">
+      <h1 className="dashboard-header">User Dashboard</h1>
       <Link to="/admin/dashboard">Dashboard</Link>
       <h3>Value: {value}</h3>
       <button onClick={() => dispatch(increment())}>Increase</button>

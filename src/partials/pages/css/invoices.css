@@ -203,3 +203,10 @@
   background-color: var(--secondary-60);
   color: var(--cool-gray-10);
 }
+
+
+@media (width < 640px) {
+    .invoice-page-container {
+        margin-top: 65px;
+    }
+  }

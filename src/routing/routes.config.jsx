@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import AuthLayout from "../partials/layouts/AuthLayout";
 import PortalLayout from "../partials/layouts/PortalLayout";
 import Unauthorized from "../partials/pages/auth/Unauthorized";
+import ProfilePage from "../partials/pages/user/profilePage/ProfilePage";
 
 const NotFound = lazy(() => import("../partials/pages/NotFound"));
 const SendEmail = lazy(() => import("../partials/pages/auth/SendEmail"))
@@ -44,6 +45,7 @@ export const routes = [
     layout: PortalLayout,
     protected: true,
     children: [
+      { path: "/profile", element: <ProfilePage /> },
       { path: "/dashboard", element: <UserDashboard /> },
       { path: "/bookings", element: <UserBookings /> },
       { path: "/events", element: <UserEvents /> },
@@ -81,6 +83,7 @@ export const routes = [
     layout: PortalLayout,
     protected: true,
     children: [
+      { path: "/profile", element: <ProfilePage /> },
       { path: "/dashboard", element: <UserDashboard /> },
       { path: "/bookings", element: <UserBookings /> },
     ],

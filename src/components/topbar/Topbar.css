@@ -1,6 +1,12 @@
-.topbar {
+.topbar-container {
   padding: 12px;
 }
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: center;
+}
+
 .topbar-path {
   color: #94359954;
   font-size: 11px;
@@ -9,4 +15,154 @@
 .topbar-header {
   color: #37437d;
   font-size: 24px;
+}
+
+.search-bar-container {
+  height: 100%;
+  display: flex;
+  margin-right: 12px;
+  justify-content: end;
+  align-items: center;
+}
+
+.serach-bar {
+  height: 40px;
+  width: 370px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border:  none;
+  background-color: var(--gray-10);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.serach-bar > input {
+  height: 100%;
+  width: 100%;
+  padding-left: 1.5rem;
+  border: none;
+}
+
+.serach-bar > input:focus {
+  outline: none;
+}
+
+.serach-icon-btn {
+  height: 18px;
+  width: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.serach-icon-btn > img {
+  height: 18px;
+  width: 18px;
+}
+
+.notification-settings-contianer {
+  height: 100%;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+}
+
+.notification-settings-contianer > button {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.notification-settings-contianer > button > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.profile-info-container {
+  height: 100%;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.name-role > h3 {
+  padding: 0;
+  margin: 0;
+  color: var(--secondary-100);
+}
+
+.name-role > p {
+  padding: 0;
+  margin: 0;
+  color: var(--gray-70);
+}
+
+/* Mobile: max-width 639px */
+@media (max-width: 639px) {
+  .topbar-container{
+    display: none;
+  }
+}
+
+/* Tablet: 640px to 1023px */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .topbar {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    align-items: center;
+  }
+
+  .serach-bar > input {
+    display: none;
+  }
+
+  .search-bar-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .serach-bar {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .serach-icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-image: url("/icons/searchButtonTablet.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .serach-icon-btn > img {
+    display: none;
+  }
 }
