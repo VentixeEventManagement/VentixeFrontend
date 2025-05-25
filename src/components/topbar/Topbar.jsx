@@ -72,7 +72,12 @@ const Topbar = () => {
                     </div>
 
                     <div className="notification-settings-contianer">
-
+                        <button>
+                            <img src="/icons/NotificationsButtonIcon.svg" alt="Notification button" />
+                        </button>
+                        <button>
+                            <img src="/icons/SettingsButtonIcon.svg" alt="Setting button" />
+                        </button>
                     </div>
 
                     <div className="profile-info-container">

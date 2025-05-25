@@ -19,8 +19,8 @@
 
 .search-bar-container {
   height: 100%;
-  margin-left: 1rem;
   display: flex;
+  margin-right: 12px;
   justify-content: end;
   align-items: center;
 }
@@ -66,11 +66,34 @@
 }
 
 .notification-settings-contianer {
-  margin: 0 1rem;
+  height: 100%;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+}
+
+.notification-settings-contianer > button {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.notification-settings-contianer > button > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .profile-info-container {
-  margin: 0 1rem;
+  height: 100%;
+  margin-right: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -97,17 +120,26 @@
 
 /* Tablet: 640px to 1023px */
 @media (min-width: 640px) and (max-width: 1023px) {
+  .topbar {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    align-items: center;
+  }
+
   .serach-bar > input {
     display: none;
   }
 
   .search-bar-container {
     width: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .serach-bar {
     width: 40px;
     height: 40px;
+    margin-right: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
