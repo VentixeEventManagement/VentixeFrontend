@@ -10,16 +10,25 @@ const SendEmail = lazy(() => import("../partials/pages/auth/SendEmail"))
 const Verify = lazy(() => import("../partials/pages/auth/verify/Verify"))
 const SignUp = lazy(() => import("../partials/pages/auth/SignUp"));
 const SignIn = lazy(() => import("../partials/pages/auth/SignIn"));
+
 const UserDashboard = lazy(() => import("../partials/pages/user/Dashboard"));
 const UserBookings = lazy(() => import("../partials/pages/user/Bookings"));
 const AdminDashboard = lazy(() => import("../partials/pages/admin/Dashboard"));
 const AdminBookings = lazy(() => import("../partials/pages/admin/Bookings"));
 const Invoices = lazy(() => import("../partials/pages/admin/Invoices"));
 
+const UserEvents = lazy(() => import("../partials/pages/user/Events"));
+const AdminEvents = lazy(() => import("../partials/pages/admin/Events"));
+
+const Calendar = lazy(() => import("../partials/pages/user/Calendar"));
+
 export const routes = [
+  // Root Redirect
   {
     children: [{ path: "/", element: <Navigate to="/dashboard" replace /> }],
   },
+
+  // Auth Routes
   {
     layout: AuthLayout,
     children: [
@@ -30,6 +39,8 @@ export const routes = [
       { path: "/denied", element: <Unauthorized /> },
     ],
   },
+
+  // User Portal Routes
   {
     layout: PortalLayout,
     protected: true,
@@ -37,8 +48,12 @@ export const routes = [
       { path: "/profile", element: <ProfilePage /> },
       { path: "/dashboard", element: <UserDashboard /> },
       { path: "/bookings", element: <UserBookings /> },
+      { path: "/events", element: <UserEvents /> },
+      { path: "/calendar", element: <Calendar /> },
     ],
   },
+
+  // Admin Portal Routes
   {
     layout: PortalLayout,
     protected: true,
@@ -47,10 +62,8 @@ export const routes = [
       { path: "/admin/dashboard", element: <AdminDashboard /> },
       { path: "/admin/bookings", element: <AdminBookings /> },
       { path: "/admin/invoices", element: <Invoices /> },
+      { path: "/admin/events", element: <AdminEvents /> },
     ],
-  },
-  {
-    children: [{ path: "*", element: <NotFound /> }],
   },
 
   {

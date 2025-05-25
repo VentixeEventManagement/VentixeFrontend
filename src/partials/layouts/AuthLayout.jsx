@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SkipAuthButton from '../../components/DevKit/SkipAuthButton.jsx'
+import SkipAuthButton from '../../components/devKit/SkipAuthButton.jsx'
 
 const AuthLayout = () => {
   return (

@@ -18,6 +18,7 @@ const SkipAuthButton = () => {
         <button onClick={handleSkipAuth}>
             Skip Authentication
         </button>
+        
     );
 };
 
