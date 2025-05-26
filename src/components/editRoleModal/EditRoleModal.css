@@ -10,3 +10,29 @@
     padding: 1rem;
     border-radius: 1rem;
 }
+
+.edit-modal-wrapper > p {
+    margin: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    color: var(--secondary-100);
+    font-weight: 600;
+}
+
+.save-btn-layout {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.save-btn-layout > button {
+    width: 50%;
+    margin-top: 1rem;
+    padding: 0.3rem 0;
+    border: none;
+    border-radius: 1rem;
+    background-color: var(--primary-100);
+    color: var(--cool-gray-10);
+    font-weight: 400;
+    cursor: pointer;
+}

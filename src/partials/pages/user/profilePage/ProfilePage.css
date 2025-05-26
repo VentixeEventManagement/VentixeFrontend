@@ -132,3 +132,22 @@
     color: var(--cool-gray-10);
     cursor: pointer;
 }
+
+@media (max-width: 639px) {
+    .profile-image-container {
+        margin-top: 61px;
+        display: flex;
+        padding-bottom: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .profile-image-container {
+        display: flex;
+        padding-bottom: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
