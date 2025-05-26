@@ -28,8 +28,14 @@ const Topbar = () => {
             setName(`${profileInfo.firstName} ${profileInfo.lastName}`);
             setProfileImage(profileInfo.profileImageUrl)
         }
-    }, [profileInfo, profileImage])
+    }, [profileInfo, profileImage, profileImageUpdated])
 
+    useEffect(() => {
+        if (profileInfo === null) {
+            dispatch(getUserInfo(cookies.userId));
+        }
+
+    }, [profileInfo, cookies.userId, dispatch])
 
 
     const getTitle = (pathname) => {

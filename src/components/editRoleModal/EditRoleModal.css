@@ -1,0 +1,12 @@
+.edit-modal-wrapper {
+    position: absolute;
+    display: grid;
+    justify-content: center;
+    width: 200px;
+    top: 2rem;
+    right: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 1rem;
+}
