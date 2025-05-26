@@ -1,0 +1,60 @@
+.user-page-container {
+    height: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--gray-20);
+
+    @media (width < 640px) {
+    margin-top: 65px;
+  }
+}
+
+.table-wrapper {
+    border-radius: 1rem;
+    background-color: var(--gray-10);
+    padding: 1rem;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.user-table thead tr {
+  border-bottom: 2px solid var(--gray-30);
+}
+
+.user-table th,
+.user-table td {
+  padding: 0.75rem;
+  text-align: left; 
+}
+
+.user-table tbody tr {
+  border-bottom: 1px solid var(--gray-30);
+}
+
+.edit-role-section {
+    display: flex;
+    align-items: center;
+}
+
+.edit-role-btn {
+    margin-left: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 0.6rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.edit-role-btn:hover {
+    background-color: var(--primary-100);
+}
+
+.display-edit-modal-btn {
+    position: relative;
+}

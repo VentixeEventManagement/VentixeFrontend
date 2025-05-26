@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser, getUserInfo as getUserInfo } from "../../../../features/ProfileInfoSlice";
+import { updateUser, getUserInfo } from "../../../../features/ProfileInfoSlice";
 import { getAccountInfo } from "../../../../features/AuthSlice";
 import { useCookies } from "react-cookie";
 import Spinner from "../../../../components/spinner/Spinner";
+import { AddUserProfileInfo } from "../../../../features/ProfileInfoSlice";
 import "./ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 
@@ -11,11 +12,11 @@ const ProfilePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const fileInputRef = useRef();
-    const { loading: profileLoading, error: profileError, succeeded: profileSucceeded, profileInfo } = useSelector((state) => state.profileInfo);
+    const { loading: profileLoading, error: profileError, succeeded: profileSucceeded, profileInfo, resetStatus } = useSelector((state) => state.profileInfo);
     const { user, succeeded: userSucceeded, loading: userLoading } = useSelector((state) => state.auth);
     const [cookies] = useCookies(["cookie-userId", "cookie-role"]);
 
-    const [email, setEmail] = useState("bjorn1@domain.com");
+    const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [city, setCity] = useState("");
@@ -24,21 +25,30 @@ const ProfilePage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [imagePreview, setImagePreview] = useState("/profileImages/avatar.svg");
 
+    const [hasFetched, setHasFetched] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
-        dispatch(getUserInfo(cookies.userId));
+        if (cookies.userId) {
+            dispatch(getAccountInfo(cookies.userId))
+        }
 
     }, [cookies.userId, dispatch])
 
     useEffect(() => {
-        dispatch(getAccountInfo(cookies.userId))
+        if (profileInfo) {
+            setIsEditing(false);
+        } else {
+            setIsEditing(true);
+        }
+    }, [profileInfo]);
 
+    useEffect(() => {
         if (user) {
             setPhoneNumber(user.phoneNumber || "");
             setEmail(user.email || "");
         }
-    }, [cookies.userId, dispatch])
+    }, [user])
 
     useEffect(() => {
 
@@ -67,6 +77,24 @@ const ProfilePage = () => {
         }
     }
 
+    const handleNewUserInformation = () => {
+        const user = {
+            userId: cookies.userId,
+            selectedFile: selectedFile,
+            firstName: firstName,
+            lastName: lastName
+        };
+
+        const isFirstNameEmpty = !firstName || firstName.trim() === "";
+        const isLastNameEmpty = !lastName || lastName.trim() === "";
+
+        if (!isFirstNameEmpty && !isLastNameEmpty) {
+            dispatch(AddUserProfileInfo(user));
+        } else {
+            console.log("All fields are empty");
+        }
+    }
+
     const handleUpdate = () => {
         if (isEditing) {
             const user = {
@@ -75,10 +103,6 @@ const ProfilePage = () => {
                 firstName: firstName,
                 lastName: lastName
             };
-
-            // if (!ifNewFile && selectedFile) {
-            //     user.selectedFile = selectedFile;
-            // }
 
             dispatch(updateUser(user));
         }
@@ -127,7 +151,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="account-details-footer">
-                    <button onClick={handleUpdate}>{isEditing ? "Update" : "Edit"}</button>
+                    {profileInfo === null ? <button onClick={handleNewUserInformation}>Add your information</button> : <button onClick={handleUpdate}>{isEditing ? "Update" : "Edit"}</button>}
                     <button onClick={handleClose}>Close</button>
                 </div>
             </div>
