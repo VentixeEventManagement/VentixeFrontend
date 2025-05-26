@@ -16,9 +16,6 @@ const initialState = {
 export const AddUserProfileInfo = createAsyncThunk("uset/add", async (user, { rejectWithValue }) => {
     try {
 
-        console.log("USER: ", user.selectedFile);
-
-
         const formData = new FormData();
         formData.append("userId", user.userId);
         formData.append("firstName", user.firstName);
@@ -114,8 +111,6 @@ export const getUserInfo = createAsyncThunk("user/get", async (userId, { rejectW
         };
 
         const json = await response.json();
-        console.log("PROFILE INFO: ", json);
-
         return json.result;
 
     } catch (err) {

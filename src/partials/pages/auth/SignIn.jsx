@@ -20,13 +20,12 @@ const SignIn = () => {
       setPassword("");
       navigate("/dashboard")
       setCookie("userId", user.userId, { path: "/" });
-      setCookie("userRole", user.roleName, { path: "/" });
+
     }
   }, [isAuthenticated, navigate])
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
-    console.log("USER ID: ", cookies);
   }
 
   const handlePasswordChange = (e) => {
