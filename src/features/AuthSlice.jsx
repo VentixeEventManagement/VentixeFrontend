@@ -5,6 +5,7 @@ const accountUrl = "https://authserviceprovider-hjhncsdmcbhdfzaj.swedencentral-0
 
 
 const initialState = {
+    accounts: [],
     user: null,
     token: null,
     isAuthenticated: false,
@@ -12,7 +13,62 @@ const initialState = {
     error: null,
     succeeded: false,
     message: "",
+    updated: null,
 }
+
+export const updateRole = createAsyncThunk("auth/updaterole", async ({ userId, roleName }, { rejectWithValue }) => {
+
+    try {
+
+        const response = await fetch(`${url}/changerole?userId=${userId}&role=${roleName}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+
+            return rejectWithValue(error);
+        };
+
+        const json = await response.json();
+        return json.succeeded;
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when updating role.");
+    }
+});
+
+export const GetAllAccounts = createAsyncThunk("auth/getAll", async (_, { rejectWithValue }) => {
+    try {
+        const response = await fetch(`${url}/getaccounts`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            let errors = error.errors;
+
+            if (errors) {
+                return rejectWithValue(errors.UserId[0]);
+            }
+
+            return rejectWithValue(error);
+
+        };
+
+        const json = await response.json();
+        return json;
+
+    } catch (err) {
+        return rejectWithValue(err.message || "Something went wrong when fetching accounts.");
+    }
+})
 
 export const getAccountInfo = createAsyncThunk("auth/accountInfo", async (userId, { rejectWithValue }) => {
 
@@ -162,6 +218,7 @@ const authSlice = createSlice({
             state.error = null;
             state.succeeded = false;
             state.message = "";
+            state.updated = false;
         },
 
         simulateLogin: (state) => {
@@ -174,6 +231,40 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            // Update role
+            .addCase(updateRole.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.succeeded = false;
+            })
+            .addCase(updateRole.fulfilled, (state, action) => {
+                state.loading = false;
+                state.updated = action.payload;
+                state.succeeded = true;
+            })
+            .addCase(updateRole.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.succeeded = false;
+            })
+
+            // Get all accounts
+            .addCase(GetAllAccounts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.succeeded = false;
+            })
+            .addCase(GetAllAccounts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.accounts = action.payload;
+                state.succeeded = true;
+            })
+            .addCase(GetAllAccounts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.succeeded = false;
+            })
 
             // Get account info
             .addCase(getAccountInfo.pending, (state) => {

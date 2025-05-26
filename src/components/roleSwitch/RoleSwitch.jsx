@@ -8,8 +8,8 @@ const RoleSwitch = ({ selectedRole, onChange }) => {
     const [role, setRole] = useState(selectedRole || "user");
 
     const roles = {
-        admin: "Admin",
-        user: "User"
+        Admin: "Admin",
+        User: "User"
     }
 
     const toggleRole = (newRole) => {

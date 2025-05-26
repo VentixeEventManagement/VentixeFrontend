@@ -10,13 +10,13 @@ const Topbar = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const { loading, error, succeeded, profileInfo, profileImageUpdated } = useSelector((state) => state.profileInfo);
-    const [cookies] = useCookies(["cookie-userId", "cookie-role"]);
+    const [cookies, setCookie] = useCookies(["cookie-userId", "cookie-role"]);
     const [roleName, setRoleName] = useState("");
     const [name, setName] = useState("");
     const [profileImage, setProfileImage] = useState(null);
 
     useEffect(() => {
-        setRoleName(cookies.role);
+        setRoleName(cookies.userRole);
     }, [cookies])
 
     useEffect(() => {
