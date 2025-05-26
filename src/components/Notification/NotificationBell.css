@@ -1,0 +1,28 @@
+.notification-wrapper {
+    position: relative;
+    margin-top: 6px;
+  }
+  
+  .bell-icon {
+    font-size: 22px;
+    cursor: pointer;
+    color: #555;
+  }
+  
+  .bell-icon.active {
+    color: var(--primary-90);
+  }
+  
+  .notification-dropdown {
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-width: 200px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  

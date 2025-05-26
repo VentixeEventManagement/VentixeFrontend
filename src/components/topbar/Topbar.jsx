@@ -5,6 +5,7 @@ import ProfileIconBtn from "../profileIconBtn/ProfileIconBtn";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../../features/ProfileInfoSlice";
+import NotificationBell from "../Notification/NotificationBell";
 
 const Topbar = () => {
     const location = useLocation();
@@ -82,9 +83,7 @@ const Topbar = () => {
                     </div>
 
                     <div className="notification-settings-contianer">
-                        <button>
-                            <img src="/icons/NotificationsButtonIcon.svg" alt="Notification button" />
-                        </button>
+                        <NotificationBell/>
                         <button>
                             <img src="/icons/SettingsButtonIcon.svg" alt="Setting button" />
                         </button>
