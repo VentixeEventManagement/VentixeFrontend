@@ -2,8 +2,8 @@
 import RoleSwitch from "../roleSwitch/RoleSwitch";
 import "./EditRoleModal.css";
 
-const EditRoleModal = ({ onClose, useId }) => {
-    
+const EditRoleModal = ({ onClose, userId }) => {
+
     const handleRoleChange = (newRole) => {
         console.log("Selected role: ", newRole);
 
@@ -11,9 +11,11 @@ const EditRoleModal = ({ onClose, useId }) => {
 
     return (
         <div className="edit-modal-wrapper modal">
-            <p>Edit role</p>
+            <p>Change role</p>
             <RoleSwitch selectedRole="admin" onChange={handleRoleChange} />
-            <button onClick={onClose}>Close</button>
+            <div className="save-btn-layout">
+                <button onClick={onClose}>save</button>
+            </div>
         </div>
     )
 }

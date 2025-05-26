@@ -82,7 +82,8 @@ const ProfilePage = () => {
             userId: cookies.userId,
             selectedFile: selectedFile,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            phoneNumber: phoneNumber,
         };
 
         const isFirstNameEmpty = !firstName || firstName.trim() === "";
@@ -101,7 +102,8 @@ const ProfilePage = () => {
                 userId: cookies.userId,
                 selectedFile: selectedFile,
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
+                phoneNumber: phoneNumber,
             };
 
             dispatch(updateUser(user));
