@@ -75,7 +75,10 @@
     background: transparent;
     border-radius: 12px;
     overflow: hidden;
+        height: 70vh;
+    min-height: 400px;
 }
+
 
 .rbc-month-view,
 .rbc-time-view,

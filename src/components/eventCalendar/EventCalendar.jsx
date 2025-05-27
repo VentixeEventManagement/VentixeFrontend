@@ -41,7 +41,6 @@ function EventCalendar() {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: "70vh", minHeight: 400 }}
         />
       </div>
     </div>
