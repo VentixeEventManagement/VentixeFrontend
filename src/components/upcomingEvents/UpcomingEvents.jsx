@@ -1,8 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchEvents } from "../../features/eventsSlice";
 
 const UpcomingEvents = () => {
+  const dispatch = useDispatch();
   const events = useSelector((state) => state.events.items);
+  console.log("Events from Redux store:", events);
+
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch]);
 
   const upcoming = [...events]
     .filter(e => new Date(e.startDate) > new Date())
