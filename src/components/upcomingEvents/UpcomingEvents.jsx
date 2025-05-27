@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEvents } from "../../features/eventsSlice";
+import "./UpcomingEvents.css"; 
 
 const UpcomingEvents = () => {
   const dispatch = useDispatch();
