@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../features/eventsSlice";
 import "./EventViewer.css";
 
-const EventViewer = () => {
+const EventViewer = ({ isAdmin = false, onDelete }) => {
     const dispatch = useDispatch();
     const events = useSelector((state) => state.events.items);
     const status = useSelector((state) => state.events.status);
@@ -38,6 +38,17 @@ const EventViewer = () => {
                     >
                         <div>
                             <h2>{event.title || event.name}</h2>
+                            {isAdmin && (
+                                <button
+                                    className="event-delete-btn"
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        if (onDelete) onDelete(event.id);
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            )}
                         </div>
                     </div>
                 ))}

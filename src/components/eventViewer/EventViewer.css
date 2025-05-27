@@ -1,160 +1,186 @@
 .event-viewer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    min-height: 100vh;
-    background: #f7f7f7;
-    padding: 2rem 0 2rem 2rem; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: var(--background-color);
+  padding: 2rem 0 2rem 2rem;
+  font-family: var(--font);
 }
 
 .event-list {
-    width: 100%;
-    max-width: 80vw;      
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    border: 1px solid #e0e0e0;
-    background: #fff;
-    padding: 2rem 1rem;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    max-height: 80vh;
-    overflow-y: auto;
+  width: 100%;
+  max-width: 80vw;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid var(--gray-40);
+  background: var(--gray-10);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(30,30,32,0.06);
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 @media (max-width: 1100px) {
-    .event-list {
-        max-width: 98vw;
-        margin: 0 1vw;
-        padding: 1rem 0.5rem;
-    }
+  .event-list {
+    max-width: 98vw;
+    margin: 0 1vw;
+    padding: 1rem 0.5rem;
+  }
 }
 
 .event-item {
-    display: flex;
-    align-items: flex-end;
-    cursor: pointer;
-    border-radius: 12px;
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    height: 220px;
-    min-height: 180px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  color: var(--gray-10);
+  height: 220px;
+  min-height: 180px;
+  box-shadow: 0 2px 8px rgba(30,30,32,0.10);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .event-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(30,30,32,0.18);
 }
 
 .event-item > div {
-    background: rgba(0,0,0,0.55);
-    width: 100%;
-    padding: 1rem;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+  background: rgba(28,35,70,0.60);
+  width: 100%;
+  padding: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 
 .event-item h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--gray-10);
 }
 
-/* Modal styles remain unchanged */
+/* Modal styles */
 .event-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(28,35,70, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .event-modal {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 16px;
-    max-width: 500px;
-    width: 90vw;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-    position: relative;
-    animation: modalIn 0.2s;
+  background-color: var(--cool-gray-20);
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  max-width: 500px;
+  width: 90vw;
+  box-shadow: 0 4px 24px rgba(30,30,32,0.18);
+  position: relative;
+  animation: modalIn 0.2s;
+  font-family: var(--font);
 }
 
 @keyframes modalIn {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .event-modal-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    object-fit: cover;
-    max-height: 250px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  max-height: 250px;
+}
+
+.event-modal-close,
+.event-modal-Purchase {
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 2.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
 .event-modal-close {
-    padding: 0.5rem 1.5rem;
-    margin-top: 1rem;
-    background: #eee;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.2s;
+  background: var(--gray-30);
+  color: var(--gray-90);
+  margin-right: 1rem;
 }
 
 .event-modal-close:hover {
-    background: #ddd;
+  background: var(--gray-40);
 }
 
 .event-modal-Purchase {
-    padding: 0.5rem 1.5rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    background: #1976d2;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+  background: var(--primary-100);
+  color: var(--cool-gray-10);
+  box-shadow: 0 2px 8px rgba(148,53,153,0.10);
 }
 
 .event-modal-Purchase:hover {
-    background: #1565c0;
-    box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+  background: var(--primary-110);
+  box-shadow: 0 4px 16px rgba(148,53,153,0.18);
 }
 
 .event-modal-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
 }
 
-.event-modal-close {
-    margin-top: 0;
-    margin-left: 0;
+/* Delete button for admin */
+.event-delete-btn {
+  margin-left: 1rem;
+  padding: 0.3rem 1rem;
+  border: none;
+  border-radius: 2.5rem;
+  background: var(--secondary-100);
+  color: var(--gray-10);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 1rem;
 }
 
-.event-modal-Purchase {
-    margin-top: 0;
-    margin-left: 0;
+.event-delete-btn:hover {
+  background: var(--secondary-110);
+}
+
+
+@media (max-width: 639px) {
+  .event-viewer-container {
+    padding: 1rem 0 1rem 0.5rem;
+  }
+  .event-list {
+    padding: 0.5rem 0.25rem;
+    gap: 1rem;
+  }
+  .event-modal {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+  .event-item {
+    height: 140px;
+    min-height: 100px;
+  }
 }
