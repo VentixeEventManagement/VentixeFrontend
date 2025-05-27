@@ -108,3 +108,9 @@
     gap: 0.5rem;
   }
 }
+
+.event-admin-buttons .delete-btn {
+  background-color: #e74c3c; /* Strong red */
+  color: var(--gray-10);
+  transition: background 0.2s;
+}
