@@ -132,7 +132,7 @@ const Sidebar = () => {
           </div>
 
           <div className="sidebar-container-link">
-            <NavLink className="sidebar-link" to="/events">
+            <NavLink className="sidebar-link" to="/admin/events">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
