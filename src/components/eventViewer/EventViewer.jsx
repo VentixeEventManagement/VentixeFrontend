@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents, updateEvent } from "../../features/eventsSlice";
 import "./EventViewer.css";
 
-const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
+const EventViewer = ({ isAdmin = false, onDelete }) => {
     const dispatch = useDispatch();
     const events = useSelector((state) => state.events.items);
     const status = useSelector((state) => state.events.status);
@@ -50,7 +50,6 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
     };
 
     const handleEditSave = () => {
-        // You may want to add validation here
         dispatch(updateEvent({ id: selectedEvent.id, updatedEvent: editForm }));
         setEditMode(false);
         setEditForm(null);
@@ -99,19 +98,20 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
                     <div className="event-modal" onClick={(e) => e.stopPropagation()}>
                         {editMode ? (
                             <>
-                                <h2>
+                                <h2 className="event-modal-title-edit">
                                     <input
                                         type="text"
                                         name="name"
                                         value={editForm.name}
                                         onChange={handleEditChange}
+                                        className="event-edit-input"
                                     />
                                 </h2>
                                 <textarea
                                     name="description"
                                     value={editForm.description}
                                     onChange={handleEditChange}
-                                    style={{ width: "100%", minHeight: "60px", marginBottom: "1rem" }}
+                                    className="event-edit-textarea"
                                 />
                                 <input
                                     type="text"
@@ -119,21 +119,21 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
                                     value={editForm.location}
                                     onChange={handleEditChange}
                                     placeholder="Location"
-                                    style={{ marginBottom: "1rem" }}
+                                    className="event-edit-input"
                                 />
                                 <input
                                     type="datetime-local"
                                     name="startDate"
                                     value={editForm.startDate}
                                     onChange={handleEditChange}
-                                    style={{ marginBottom: "1rem" }}
+                                    className="event-edit-input"
                                 />
                                 <input
                                     type="datetime-local"
                                     name="endDate"
                                     value={editForm.endDate}
                                     onChange={handleEditChange}
-                                    style={{ marginBottom: "1rem" }}
+                                    className="event-edit-input"
                                 />
                                 <input
                                     type="number"
@@ -141,7 +141,7 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
                                     value={editForm.ticketPrice}
                                     onChange={handleEditChange}
                                     placeholder="Ticket Price"
-                                    style={{ marginBottom: "1rem" }}
+                                    className="event-edit-input"
                                 />
                                 <input
                                     type="number"
@@ -149,7 +149,7 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
                                     value={editForm.ticketAmount}
                                     onChange={handleEditChange}
                                     placeholder="Ticket Amount"
-                                    style={{ marginBottom: "1rem" }}
+                                    className="event-edit-input"
                                 />
                                 <div className="event-modal-actions">
                                     <button className="event-modal-close" onClick={handleEditCancel}>
@@ -162,7 +162,17 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
                             </>
                         ) : (
                             <>
-                                <h2>{selectedEvent.title || selectedEvent.name}</h2>
+                                <h2 className="event-modal-title">
+                                    {selectedEvent.title || selectedEvent.name}
+                                    {isAdmin && (
+                                        <button
+                                            className="event-edit-btn"
+                                            onClick={handleEditClick}
+                                        >
+                                            Edit
+                                        </button>
+                                    )}
+                                </h2>
                                 <p>{selectedEvent.description}</p>
                                 <img
                                     src={selectedEvent.image || "https://www.hicklingcampsite.co.uk/wp-content/uploads/2016/06/Happisburgh-beach-800x300.jpg"}
@@ -191,24 +201,6 @@ const EventViewer = ({ isAdmin = false, onDelete, onEdit }) => {
                                     <button className="event-modal-Purchase" onClick={closeDialog}>
                                         Purchase
                                     </button>
-                                    {isAdmin && (
-                                        <button
-                                            className="event-edit-btn"
-                                            style={{
-                                                background: "var(--yellow-100)",
-                                                color: "var(--gray-100)",
-                                                borderRadius: "2rem",
-                                                marginLeft: "1rem",
-                                                fontWeight: 600,
-                                                padding: "0.5rem 1.5rem",
-                                                border: "none",
-                                                cursor: "pointer"
-                                            }}
-                                            onClick={() => handleEditClick()}
-                                        >
-                                            Edit
-                                        </button>
-                                    )}
                                 </div>
                             </>
                         )}
