@@ -66,31 +66,34 @@ const EventViewer = ({ isAdmin = false, onDelete }) => {
             {status === "loading" && <p>Loading events...</p>}
             {status === "failed" && <p>Error: {error}</p>}
             <div className="event-list">
-                {events.map((event) => (
-                    <div
-                        key={event.id}
-                        className="event-item"
-                        style={{
-                            backgroundImage: `url(${event.image || "https://www.hicklingcampsite.co.uk/wp-content/uploads/2016/06/Happisburgh-beach-800x300.jpg"})`
-                        }}
-                        onClick={() => handleEventClick(event)}
-                    >
-                        <div>
-                            <h2>{event.title || event.name}</h2>
-                            {isAdmin && (
-                                <button
-                                    className="event-delete-btn"
-                                    onClick={e => {
-                                        e.stopPropagation();
-                                        if (onDelete) onDelete(event.id);
-                                    }}
-                                >
-                                    Delete
-                                </button>
-                            )}
+                {events
+                    .slice()
+                    .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+                    .map((event) => (
+                        <div
+                            key={event.id}
+                            className="event-item"
+                            style={{
+                                backgroundImage: `url(${event.image || "https://www.hicklingcampsite.co.uk/wp-content/uploads/2016/06/Happisburgh-beach-800x300.jpg"})`
+                            }}
+                            onClick={() => handleEventClick(event)}
+                        >
+                            <div>
+                                <h2>{event.title || event.name}</h2>
+                                {isAdmin && (
+                                    <button
+                                        className="event-delete-btn"
+                                        onClick={e => {
+                                            e.stopPropagation();
+                                            if (onDelete) onDelete(event.id);
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </div>
 
             {selectedEvent && (
