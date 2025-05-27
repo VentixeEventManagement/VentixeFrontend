@@ -1,0 +1,110 @@
+.event-admin-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-admin-buttons button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: var(--secondary-100);
+  color: var(--gray-10);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.event-admin-buttons button:hover,
+.event-admin-buttons button:focus {
+  background-color: var(--secondary-110);
+}
+
+.dialog-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30, 30, 32, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  background-color: var(--cool-gray-20);
+  box-shadow: 0 4px 24px rgba(30,30,32,0.12);
+}
+
+.dialog h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--secondary-100);
+}
+
+.dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dialog input {
+  height: 2.5rem;
+  border: none;
+  border-bottom: 1px solid var(--gray-50);
+  background: transparent;
+  font-size: 1rem;
+  padding-left: 5px;
+  outline: none;
+  color: var(--text-color);
+}
+
+.dialog button[type="submit"] {
+  margin-top: 1rem;
+  background-color: var(--primary-100);
+  color: var(--cool-gray-10);
+  border-radius: 2.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  height: 2.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dialog button[type="submit"]:hover {
+  background-color: var(--primary-110);
+}
+
+.dialog button[type="button"] {
+  margin-top: 0.5rem;
+  background: var(--gray-30);
+  color: var(--gray-90);
+  border-radius: 2.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  height: 2.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dialog button[type="button"]:hover {
+  background: var(--gray-40);
+}
+
+
+@media (max-width: 639px) {
+  .dialog {
+    max-width: 95vw;
+    padding: 1rem;
+  }
+  .event-admin-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

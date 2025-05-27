@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./eventAdminButtons.css";
+import CreateEventForm from "./createEventForm/createEventForm";
+import { useDispatch } from "react-redux";
+import { createEvent } from "../../features/eventsSlice";
 
-const EventAdminButtons = ({ onCreate, onUpdate, onDelete }) => (
-  <div>
-    <button type="button" onClick={onCreate}>Create Event</button>
-    <button type="button" onClick={onUpdate}>Update Event</button>
-    <button type="button" onClick={onDelete}>Delete Event</button>
-  </div>
-);
+const EventAdminButtons = ({ onUpdate, onDelete }) => {
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleCreate = (data) => {
+    dispatch(createEvent(data));
+  };
+
+  return (
+    <div className="event-admin-buttons" >
+      <button type="button" onClick={() => setOpen(true)}>Create Event</button>
+      <CreateEventForm
+        open={open}
+        onClose={() => setOpen(false)}
+        onSubmit={handleCreate}
+      />
+    </div>
+  );
+};
 
 export default EventAdminButtons;
