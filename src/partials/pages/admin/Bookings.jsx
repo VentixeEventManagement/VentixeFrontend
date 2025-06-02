@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import BookingList from "../../../components/bookingList/BookingList";
 
 const Bookings = () => {
   return (
-    <div>Bookings</div>
-  )
-}
+    <>
+      <BookingList />
+    </>
+  );
+};
 
-export default Bookings
+export default Bookings;
