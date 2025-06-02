@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
-import "./CreateBookingForm.css";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./createBookingForm.css";
 
 const CreateBookingForm = ({ onBookingCreated }) => {
+  const { eventId } = useParams();
   const [formData, setFormData] = useState({
-    eventId: "",
+    eventId: eventId,
     date: new Date().toISOString().substring(0, 10),
     userId: "",
     ticketPrice: 0,
@@ -19,6 +21,32 @@ const CreateBookingForm = ({ onBookingCreated }) => {
     state: "",
     postalCode: "",
   });
+
+  useEffect(() => {
+    getEvent();
+  }, []);
+
+  const getEvent = async () => {
+    try {
+      const response = await fetch(
+        `https://ventixbookingservice-aweebpajf0g7gufx.swedencentral-01.azurewebsites.net/api/events/${eventId}`
+      );
+      if (response.ok) {
+        const event = await response.json();
+        setFormData((prev) => ({
+          ...prev,
+          // I set the eventId to string format since the booking service expects it
+          // it didn't work with int format
+          eventId: event.id,
+          ticketPrice: event.ticketPrice,
+        }));
+      } else {
+        console.error("Failed to fetch event");
+      }
+    } catch (error) {
+      console.error("Error fetching event:", error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,16 +88,32 @@ const CreateBookingForm = ({ onBookingCreated }) => {
     if (response.ok) {
       const result = await response.json();
       alert("Booking created successfully");
-      if (onBookingCreated) onBookingCreated(result); // Optional callback
+
+      if (onBookingCreated) onBookingCreated(result);
+      setFormData({
+        eventId: "",
+        date: new Date().toISOString().substring(0, 10),
+        userId: "",
+        ticketPrice: 0,
+        ticketCount: 1,
+        totalAmount: 0,
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        city: "",
+        state: "",
+        postalCode: "",
+      });
     } else {
       alert("Failed to create booking");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form-group" onSubmit={handleSubmit}>
       <h3>Create Booking</h3>
-
       <input
         name="date"
         type="date"
@@ -91,6 +135,10 @@ const CreateBookingForm = ({ onBookingCreated }) => {
         onChange={handleChange}
         required
       />
+      {/* // UserId is not needed for booking creation but I kept it // since the
+      since the eventId from event service was set as an int // and the booking
+      service expects Guid string format. I tried the conversion // but it
+      didn't work. */}
       <input
         name="eventId"
         placeholder="Event ID"
@@ -98,7 +146,6 @@ const CreateBookingForm = ({ onBookingCreated }) => {
         onChange={handleChange}
         required
       />
-
       <input
         name="email"
         placeholder="Email"
@@ -141,6 +188,7 @@ const CreateBookingForm = ({ onBookingCreated }) => {
         onChange={handleChange}
         required
       />
+      <label htmlFor="ticketPrice">Ticket Price</label>
       <input
         name="ticketPrice"
         type="number"
@@ -149,6 +197,7 @@ const CreateBookingForm = ({ onBookingCreated }) => {
         onChange={handleChange}
         required
       />
+      <label htmlFor="ticketCount">Quantity</label>
       <input
         name="ticketCount"
         type="number"
