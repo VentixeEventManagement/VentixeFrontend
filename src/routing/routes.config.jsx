@@ -6,8 +6,8 @@ import Unauthorized from "../partials/pages/auth/Unauthorized";
 import ProfilePage from "../partials/pages/user/profilePage/ProfilePage";
 
 const NotFound = lazy(() => import("../partials/pages/NotFound"));
-const SendEmail = lazy(() => import("../partials/pages/auth/SendEmail"))
-const Verify = lazy(() => import("../partials/pages/auth/verify/Verify"))
+const SendEmail = lazy(() => import("../partials/pages/auth/SendEmail"));
+const Verify = lazy(() => import("../partials/pages/auth/verify/Verify"));
 const SignUp = lazy(() => import("../partials/pages/auth/SignUp"));
 const SignIn = lazy(() => import("../partials/pages/auth/SignIn"));
 
@@ -49,7 +49,7 @@ export const routes = [
     children: [
       { path: "/profile", element: <ProfilePage /> },
       { path: "/dashboard", element: <UserDashboard /> },
-      { path: "/bookings", element: <UserBookings /> },
+      { path: "/user/bookings", element: <UserBookings /> },
       { path: "/events", element: <UserEvents /> },
       { path: "/calendar", element: <Calendar /> },
     ],
